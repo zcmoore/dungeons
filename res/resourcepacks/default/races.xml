@@ -1,0 +1,19 @@
+<races>
+    <race name="dwarf">
+        <plural>dwarves</plural>
+        <abilities>
+            <ability id="charisma" modifier="2" />
+            <ability id="constitution" modifier="2" />
+            <ability id="dexterity" modifier="2" />
+            <ability id="intelligence" modifier="2" />
+            <ability id="strength" modifier="2" />
+            <ability id="wisdom" modifier="2" />
+        </abilities>
+        <about>
+            <section>
+                <type>Physical Description</type>
+                <text></text>
+            </section>
+        </about>
+    </race>
+</races>
