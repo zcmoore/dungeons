@@ -24,6 +24,7 @@ public class Main extends StateBasedGame {
 		super(GAME_TITLE);
 		this.addState(new MainMenu());
 		this.addState(new GameBoard());
+		System.out.println("Constructor finished.");
 	}
 
 	public static void main(String[] args) throws SlickException {
