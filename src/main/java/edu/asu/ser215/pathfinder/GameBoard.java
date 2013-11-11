@@ -12,7 +12,7 @@ public class GameBoard extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello");
+		//System.out.println("Hello");
 		
 	}
 
