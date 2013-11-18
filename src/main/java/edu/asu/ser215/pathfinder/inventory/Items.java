@@ -53,7 +53,7 @@ public class Items
 	 * @param itemsFile		the XML file from which to load the items from.
 	 * @param tags	the names of every tag that should be loaded from the XML.
 	 * 				(e.g. WEAPON_NODE, ARMOUR_NODE, etc).
-	 * @see 		XMLTageNames(edu.asu.ser215.pathfinder.inventory.Items.XMLTagNames)
+	 * @see 		XMLTagNames(edu.asu.ser215.pathfinder.inventory.Items.XMLTagNames)
 	 * @return		an array of objects created from the information found in
 	 * 				the specified nodes of the given XML
 	 */

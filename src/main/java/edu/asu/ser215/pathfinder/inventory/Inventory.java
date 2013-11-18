@@ -47,7 +47,6 @@ public class Inventory
 	 * @param armours 			initial inventory contents
 	 * @param weapons 			initial inventory contents
 	 * @param copperPieces		initial monetary contents
-	 * @param volumeCapacity
 	 * @param weightCapacity
 	 */
 	public Inventory(String name, String description, String notes,
@@ -147,7 +146,7 @@ public class Inventory
 	 * Returns true if the inventory is capable of holding the given item. This
 	 * will not add the item to the Inventory.
 	 * 
-	 * @return
+	 * @return true if the inventory is capable of holding the given item
 	 */
 	public boolean canHoldItem(Item item)
 	{

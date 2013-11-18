@@ -15,7 +15,7 @@ import java.util.HashMap;
  * method must be used instead.
  * 
  * @author Zach Moore
- * @see Dice(edu.asu.ser215.pathfinder.inventory.Dice)
+ * @see edu.asu.ser215.pathfinder.inventory.Dice
  */
 public class DiceSet 
 {

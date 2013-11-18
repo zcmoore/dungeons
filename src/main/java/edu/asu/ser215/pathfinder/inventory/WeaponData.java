@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * @author Zach Moore
- * @see	edu.asu.ser215.pathfinder.inventory.ItemData.
+ * @see	edu.asu.ser215.pathfinder.inventory.ItemData
  * @see	edu.asu.ser215.pathfinder.inventory.Weapon
  */
 public class WeaponData extends ItemData

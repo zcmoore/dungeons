@@ -46,7 +46,7 @@ public class ArmourData extends ItemData
 	 * 		speed limitation for characters that can move 30ft under normal circumstances
 	 * @return ArmourData object created based on the provided parameters
 	 * 
-	 * @see ItemData#constructItemData(edu.asu.ser215.pathfinder.inventory.ItemData)
+	 * @see edu.asu.ser215.pathfinder.inventory.ItemData#constructItemData(Class, HashMap, String, Object...)
 	 */
 	@SuppressWarnings("unchecked")
 	public static ArmourData constructArmourData(String name, String type, int cost, int weight,
