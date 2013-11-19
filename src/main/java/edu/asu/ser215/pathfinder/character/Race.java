@@ -12,6 +12,9 @@ public class Race {
 	private String name;
 	private Abilities abilities;
 	private Race.Size size;
+	private int ac_modifier;
+	private double space;
+	private int natural_reach;
 
 	/**
 	 * Different sizes for each race as well as some sane defaults for armor

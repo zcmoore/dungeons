@@ -2,6 +2,8 @@ package edu.asu.ser215.pathfinder.inventory;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import edu.asu.ser215.pathfinder.core.DiceSet;
+
 /**
  * @author Zach Moore
  * @see	edu.asu.ser215.pathfinder.inventory.ItemData

@@ -1,4 +1,4 @@
-package edu.asu.ser215.pathfinder.inventory;
+package edu.asu.ser215.pathfinder.core;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -23,6 +23,7 @@ import java.util.Random;
 public class Dice 
 {
 	public static final int DEFAULT_NUMBERING_OFFSET = 1;
+	public static final String REPRESENTATION = "d";
 	
 	/**
 	 * Contains information representing commonly used special dice in
@@ -116,7 +117,7 @@ public class Dice
 	 */
 	public static String generateName(int numberOfSides)
 	{
-		return "D" + numberOfSides;
+		return Dice.REPRESENTATION + numberOfSides;
 	}
 	
 	/**
@@ -154,7 +155,7 @@ public class Dice
 			if (defaultDice == null) //dice is not a default dice
 			{
 				//construct dice using default numbering offset
-				String[] tokens = diceName.split("D");
+				String[] tokens = diceName.split(Dice.REPRESENTATION.toUpperCase());
 				int numberOfSides = Integer.parseInt(tokens[1]);
 				returnDice = constructDice(numberOfSides, DEFAULT_NUMBERING_OFFSET);
 			}
@@ -173,9 +174,25 @@ public class Dice
 		
 	}
 	
+	/**
+	 * Get the display name of the dice
+	 * @return Display name of dice
+	 */
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	/**
+	 * A list of all available dice.
+	 * @return String listing all available dice.
+	 */
+	public static String listDice() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for(Dice dice: diceMap.values()) {
+			stringBuilder.append(dice.getName() + "\n");
+		}
+		return stringBuilder.toString();
 	}
 	
 }
