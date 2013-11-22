@@ -14,6 +14,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import edu.asu.ser215.pathfinder.core.DiceSet;
+
 public class Items 
 {
 	/**

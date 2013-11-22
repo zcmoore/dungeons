@@ -1,5 +1,7 @@
 package edu.asu.ser215.pathfinder.character;
 
+import java.util.HashMap;
+
 /**
  * A singleton class that represents all the available races in the game.
  * 
@@ -7,11 +9,14 @@ package edu.asu.ser215.pathfinder.character;
  * 
  */
 public class Race {
-	private static Race[] races;
+	private static HashMap<String, Race> raceMap;
 
 	private String name;
 	private Abilities abilities;
 	private Race.Size size;
+	private int ac_modifier; // Armor class modifier
+	private double space; // Amount of space on the board
+	private int natural_reach; // How far the race can naturally reach
 
 	/**
 	 * Different sizes for each race as well as some sane defaults for armor
@@ -43,39 +48,98 @@ public class Race {
 	}
 
 	/**
-	 * Private constructor to prevent any external objects.
+	 * Creates a new race with the given attributes.
+	 * @param name The name of the race
+	 * @param abilities List of default abilities the race may have
+	 * @param size The size of the race
+	 * @param ac_modifier Armor class modifier
+	 * @param space Amount of space on the board.
 	 */
-	private Race() {
+	private Race(
+			String name, Abilities abilities, Race.Size size,
+			int ac_modifier, double space, int natural_reach) {
+		this.name = name;
+		this.abilities = abilities;
+		this.size = size;
+		this.ac_modifier = ac_modifier;
+		this.space = space;
+		this.natural_reach = natural_reach;
 	}
 	
-	public static int get(String race) {
-		// TODO: Check if races has been initialized
-		for(int i = 0; i < Race.races.length; i++) {
-			if(Race.races[i].name.equalsIgnoreCase(race)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
 	/**
-	 * Given an array of names, abilities, and sizes, create a static array of
-	 * races if none yet exists.
-	 * 
-	 * @param names Names of each race
-	 * @param abilities Abilities of each race
-	 * @param sizes Sizes of each race
+	 * Adds a new Race to the HashMap
+	 * @param name The name of the race
+	 * @param abilities List of default abilities the race may have
+	 * @param size The size of the race
+	 * @param ac_modifier Armor class modifier
+	 * @param space Amount of space on the board.
+	 * @param natural_reach How far the race can reach
 	 */
-	public static void setRaces(String[] names, Abilities[] abilities, Race.Size[] sizes) {
-		if (Race.races == null) {
-			if (names.length == abilities.length && abilities.length == sizes.length) {
-				Race.races = new Race[names.length];
-				for (int race = 0; race < names.length; race++) {
-					Race.races[race].name = names[race];
-					Race.races[race].abilities = abilities[race];
-					Race.races[race].size = sizes[race];
-				}
-			}
+	public static void add(
+			String name, Abilities abilities, Race.Size size,
+			int ac_modifier, double space, int natural_reach) {
+		if(raceMap == null)
+			raceMap = new HashMap<String, Race>();
+		if(!raceMap.containsKey(name)) {
+			Race race = new Race(name, abilities, size, ac_modifier, space, natural_reach);
+			raceMap.put(name, race);
 		}
 	}
+	
+	/**
+	 * Similar to the other add function except it uses the default armor class
+	 * modifier, space, and natural reach from the size.
+	 * @see Race#add(String, Abilities, Size, int, double, int)
+	 */
+	public static void add(
+			String name, Abilities abilities, Race.Size size) {
+		Race.add(name, abilities, size, size.ac_modifier, size.space, size.natural_reach);
+	}
+	
+	/**
+	 * Retrieves a race from the raceMap
+	 * @param race
+	 * @return The Race
+	 */
+	public static Race get(String race) {
+		if(raceMap == null)
+			raceMap = new HashMap<String, Race>();
+		if(raceMap.containsKey(race))
+			return raceMap.get(race);
+		return null;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public Abilities getAbilities() {
+		return abilities;
+	}
+	
+	public Race.Size getSize() {
+		return size;
+	}
+	
+	public int getACModifier() {
+		return ac_modifier;
+	}
+	
+	public double getSpace() {
+		return space;
+	}
+	
+	public int getNaturalReach() {
+		return natural_reach;
+	}
+	
+	public String toString() {
+		return name;
+	}
+	
+	/**
+	 * Looking for setters? Well there aren't any as races are determined only once.
+	 * We don't support the evolution of races attributes and abilities.
+	 */
+	
 }

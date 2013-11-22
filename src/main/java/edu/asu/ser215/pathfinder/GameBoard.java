@@ -11,9 +11,6 @@ public class GameBoard extends BasicGameState {
 
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		// TODO Auto-generated method stub
-		System.out.println("Hello");
-		
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
@@ -24,13 +21,11 @@ public class GameBoard extends BasicGameState {
 
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return GameBoard.ID;
 	}
 

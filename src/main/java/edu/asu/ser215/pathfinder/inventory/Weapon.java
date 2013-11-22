@@ -1,5 +1,7 @@
 package edu.asu.ser215.pathfinder.inventory;
 
+import edu.asu.ser215.pathfinder.core.DiceSet;
+
 /**
  * @author 	Zach Moore
  * @see 	edu.asu.ser215.pathfinder.inventory.Item

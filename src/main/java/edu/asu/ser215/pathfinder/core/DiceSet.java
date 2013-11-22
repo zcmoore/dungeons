@@ -1,4 +1,4 @@
-package edu.asu.ser215.pathfinder.inventory;
+package edu.asu.ser215.pathfinder.core;
 import java.util.HashMap;
 
 /**
@@ -41,14 +41,14 @@ public class DiceSet
 	public static DiceSet parseDiceSet(String string)
 	{
 		//split into two numbers (e.g. 2d6 becomes {2, 6}
-		String[] tokens = string.split("d");
+		String[] tokens = string.toUpperCase().split(Dice.REPRESENTATION.toUpperCase());
 		int numberOfDice;
 		String diceString;
 		
 		//the first number represents the number of dice
 		numberOfDice = Integer.parseInt(tokens[0]);
 		//the second number represents the type of dice
-		diceString = "D" + Integer.parseInt(tokens[1]);
+		diceString = Dice.REPRESENTATION + Integer.parseInt(tokens[1]);
 		
 		return constructDiceSet(numberOfDice, Dice.parseDice(diceString));
 	}
