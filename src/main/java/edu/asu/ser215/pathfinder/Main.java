@@ -10,8 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
  * 
  */
 public class Main extends StateBasedGame {
-	public static final int WINDOW_WIDTH = 800;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final int WINDOW_WIDTH = 1280;
+	public static final int WINDOW_HEIGHT = 720;
 	public static final String GAME_TITLE = "Dungeon";
 	// List of Game States that should be initialized
 	// NOTE: These states MUST be added in the constructor first

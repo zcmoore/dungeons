@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<items>
+	<armour id="A0001">
+		<name>NULL</name>
+		<type>NULL</type>
+		<description>NULL</description>
+		<cost>1000</cost>
+		<weight>1000</weight>
+		<armourBonus>1000</armourBonus>
+		<armourCheckPenalty>1000</armourCheckPenalty>
+		<maxDexBonus>1000</maxDexBonus>
+		<arcaneFailureChance>0.89</arcaneFailureChance>
+		<speedLimitation20>1000</speedLimitation20>
+		<speedLimitation30>1000</speedLimitation30>
+	</armour>
+	<weapon id="W0001">
+		<name>Gauntlet</name>
+		<type>Unarmed</type>
+		<description>NULL</description>
+		<cost>200</cost>
+		<range>0</range>
+		<weight>1</weight>
+		<damageRollSmall>1d2</damageRollSmall>
+		<damageRollMedium>1d3</damageRollMedium>
+		<critMultiplier>2</critMultiplier>
+		<minimumCritRoll>20</minimumCritRoll>
+		<damageTypes>B</damageTypes>
+	</weapon>
+	<weapon id="W0003">
+		<name>Dagger</name>
+		<type>Light Melee Weapon</type>
+		<description>NULL</description>
+		<cost>200</cost>
+		<range>10</range>
+		<weight>1</weight>
+		<damageRollSmall>1d3</damageRollSmall>
+		<damageRollMedium>1d4</damageRollMedium>
+		<critMultiplier>2</critMultiplier>
+		<minimumCritRoll>19</minimumCritRoll>
+		<damageTypes>P,S</damageTypes>
+	</weapon>
+	<weapon id="W0007">
+		<name>Sickle</name>
+		<type>Light Melee Weapon</type>
+		<description>NULL</description>
+		<cost>600</cost>
+		<range>0</range>
+		<weight>2</weight>
+		<damageRollSmall>1d4</damageRollSmall>
+		<damageRollMedium>1d6</damageRollMedium>
+		<critMultiplier>2</critMultiplier>
+		<minimumCritRoll>20</minimumCritRoll>
+		<damageTypes>S</damageTypes>
+	</weapon>
+	<weapon id="W0008">
+		<name>Club</name>
+		<type>One-Handed Melee Weapon</type>
+		<description>NULL</description>
+		<cost>0</cost>
+		<range>10</range>
+		<weight>3</weight>
+		<damageRollSmall>1d4</damageRollSmall>
+		<damageRollMedium>1d6</damageRollMedium>
+		<critMultiplier>2</critMultiplier>
+		<minimumCritRoll>20</minimumCritRoll>
+		<damageTypes>B</damageTypes>
+	</weapon>
+	<weapon id="W0009">
+		<name>Heavy Mace</name>
+		<type>One-Handed Melee Weapon</type>
+		<description>NULL</description>
+		<cost>1200</cost>
+		<range>0</range>
+		<weight>8</weight>
+		<damageRollSmall>1d6</damageRollSmall>
+		<damageRollMedium>1d8</damageRollMedium>
+		<critMultiplier>2</critMultiplier>
+		<minimumCritRoll>20</minimumCritRoll>
+		<damageTypes>B</damageTypes>
+	</weapon>
+	<weapon id="W0006">
+		<name>NULL</name>
+		<type>NULL</type>
+		<description>NULL</description>
+		<cost>NULL</cost>
+		<range>NULL</range>
+		<weight>NULL</weight>
+		<damageRollSmall>NULL</damageRollSmall>
+		<damageRollMedium>NULL</damageRollMedium>
+		<critMultiplier>NULL</critMultiplier>
+		<minimumCritRoll>NULL</minimumCritRoll>
+		<damageTypes>NULL</damageTypes>
+	</weapon>
+	<weapon id="W0007">
+		<name>NULL</name>
+		<type>NULL</type>
+		<description>NULL</description>
+		<cost>NULL</cost>
+		<range>NULL</range>
+		<weight>NULL</weight>
+		<damageRollSmall>NULL</damageRollSmall>
+		<damageRollMedium>NULL</damageRollMedium>
+		<critMultiplier>NULL</critMultiplier>
+		<minimumCritRoll>NULL</minimumCritRoll>
+		<damageTypes>NULL</damageTypes>
+	</weapon>
+	<weapon id="W0008">
+		<name>NULL</name>
+		<type>NULL</type>
+		<description>NULL</description>
+		<cost>NULL</cost>
+		<range>NULL</range>
+		<weight>NULL</weight>
+		<damageRollSmall>NULL</damageRollSmall>
+		<damageRollMedium>NULL</damageRollMedium>
+		<critMultiplier>NULL</critMultiplier>
+		<minimumCritRoll>NULL</minimumCritRoll>
+		<damageTypes>NULL</damageTypes>
+	</weapon>
+	<weapon id="W0009">
+		<name>NULL</name>
+		<type>NULL</type>
+		<description>NULL</description>
+		<cost>NULL</cost>
+		<range>NULL</range>
+		<weight>NULL</weight>
+		<damageRollSmall>NULL</damageRollSmall>
+		<damageRollMedium>NULL</damageRollMedium>
+		<critMultiplier>NULL</critMultiplier>
+		<minimumCritRoll>NULL</minimumCritRoll>
+		<damageTypes>NULL</damageTypes>
+	</weapon>
+</items>

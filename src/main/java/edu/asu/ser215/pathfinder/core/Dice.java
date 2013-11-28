@@ -185,7 +185,7 @@ public class Dice
 	
 	/**
 	 * A list of all available dice.
-	 * @return String listing all available dice.
+	 * @return String listing all available dice. One dice per line
 	 */
 	public static String listDice() {
 		StringBuilder stringBuilder = new StringBuilder();

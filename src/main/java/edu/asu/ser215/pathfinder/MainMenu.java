@@ -17,7 +17,8 @@ public class MainMenu extends BasicGameState {
 	private int delta = 1;
 
 	public void init(GameContainer container, StateBasedGame game)
-			throws SlickException {
+			throws SlickException 
+	{
 		demo = new Image("res/resourcepacks/default/img/orc.png");
 	}
 
