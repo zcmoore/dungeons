@@ -7,11 +7,11 @@ import java.util.HashMap;
  * Each AbilityType is mapped upon instantiation, and will be unique. This class
  * contains a map of all AbilityTypes that are available. Each AbilityType is
  * associated with an index (which is unique to each instance), which will be
- * used to reference the value of each attribute in Character, and all other
+ * used to reference the value of each attribute in AbilityScoreList, and all other
  * classes which have a value for each AbilityType
  * 
  * @author Zach Moore
- * @see edu.asu.ser215.pathfinder.Character
+ * @see edu.asu.ser215.pathfinder.AbilityScoreList
  * @see edu.asu.ser215.pathfinder.AbilityScore
  * @see <a 
  *      href="http://paizo.com/pathfinderRPG/prd/gettingStarted.html#strength">
@@ -55,9 +55,9 @@ public class AbilityType implements Comparable<AbilityType>
 	}
 	
 	/**Maps all ability types. The abbreviation of each ability is used as a key*/
-	private static HashMap<String, AbilityType> abilityTypeAbbreviationMap;
+	private static HashMap<String, AbilityType> abilityTypeAbbreviationMap = new HashMap<>();
 	/**Maps all ability types using name as the key*/
-	private static HashMap<String, AbilityType> abilityTypeNameMap;
+	private static HashMap<String, AbilityType> abilityTypeNameMap = new HashMap<>();
 	/**Represents the current number of AbilityType objects in abilityTypeMap*/
 	private static int currentIndex = 0;
 	
