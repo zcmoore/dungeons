@@ -6,6 +6,12 @@ public class SkillScore extends ModifiedScore
 	protected SkillType skillType;
 	protected boolean trained;
 	
+	public SkillScore(SkillType skillType) 
+	{
+		//TODO add handling in all code for null modifyingAbility
+		this(skillType, false, 0, 0, null);
+	}
+	
 	public SkillScore(SkillType skillType, boolean trained, int initialScore, 
 			int initialBonus, AbilityScore modifyingAbility) 
 	{
@@ -25,4 +31,14 @@ public class SkillScore extends ModifiedScore
 		
 		return this.modifier;
 	}
+
+	public SkillType getSkillType() {
+		return skillType;
+	}
+
+	public boolean isTrained() {
+		return trained;
+	}
+	
+	
 }
