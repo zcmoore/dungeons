@@ -22,12 +22,17 @@ public class ModifiedScore extends Score
 	@Override
 	protected int recalculateModifier()
 	{
-		this.modifier = this.modifiedScore + this.modifyingAbility.getModifier();
+		this.modifier += this.modifyingAbility.getModifier();
 		return this.modifier;
 	}
 
 	public AbilityScore getModifyingAbility()
 	{
 		return modifyingAbility;
+	}
+	
+	public int getValue()
+	{
+		return this.modifier;
 	}
 }

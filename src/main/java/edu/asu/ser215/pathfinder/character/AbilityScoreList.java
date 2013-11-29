@@ -1,7 +1,6 @@
 package edu.asu.ser215.pathfinder.character;
 
 import java.util.ArrayList;
-
 import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
 
 public class AbilityScoreList 
