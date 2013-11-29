@@ -14,7 +14,7 @@ public abstract class Character
 	protected int currentHitPoints;
 	
 	protected String name;
-	protected AbilityList abilities;
+	protected AbilityScoreList abilities;
 
 	@Override
 	public abstract String toString();

@@ -1,5 +1,6 @@
 package edu.asu.ser215.pathfinder.character;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -19,6 +20,13 @@ import java.util.HashMap;
  */
 public class AbilityType implements Comparable<AbilityType>
 {
+	/**
+	 * Exception thrown when an attempt is made to add a duplicate abbreviation
+	 * to the abbreviation map
+	 * 
+	 * @author Zach Moore
+	 *
+	 */
 	private static class NotUniqueException extends Exception
 	{
 		private static final long serialVersionUID = 1L;
@@ -29,6 +37,13 @@ public class AbilityType implements Comparable<AbilityType>
 		}
 	}
 	
+	/**
+	 * Exception thrown when an attempt is made to access an AbilityType that
+	 * does not exist or has not been mapped
+	 * 
+	 * @author Zach Moore
+	 *
+	 */
 	public static class UnmappedException extends Exception
 	{
 		private static final long serialVersionUID = 1L;
@@ -142,10 +157,21 @@ public class AbilityType implements Comparable<AbilityType>
 		return returnObject;
 	}
 	
+	/**
+	 * Returns a sorted list of abilityTypes, in order of their index
+	 * 
+	 * @return sorted array of all AbilityType objects
+	 */
 	public static AbilityType[] getAbilityTypes()
 	{
-		//return all instances AbilityTypes that have been created
-		return abilityTypeNameMap.values().toArray(new AbilityType[abilityTypeNameMap.size()]);
+		//create and populate array of all abilityTypes
+		AbilityType[] abilityTypes = abilityTypeNameMap.values().toArray
+				(new AbilityType[abilityTypeNameMap.size()]);
+		
+		//sort by index
+		Arrays.sort(abilityTypes);
+		
+		return abilityTypes;
 	}
 	
 	public static int getNumberOfAbilityTypes()
