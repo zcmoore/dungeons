@@ -1,9 +1,10 @@
 package edu.asu.ser215.pathfinder.character;
 
-public class CombatStatistics 
+public class CombatEntity 
 {
 	public static final int DEFAULT_HIT_POINTS = 10;
 	
+	protected int difficultyChallenge; //a single int to represent to overall power of the entity
 	protected ModifiedScore hitPoints; //bonus will be negative to represent damage
 	protected ModifiedScore initiative;
 	protected int speedLand;
@@ -17,13 +18,15 @@ public class CombatStatistics
 	protected ModifiedScore saveFortitude;
 	protected ModifiedScore saveReflex;
 	protected ModifiedScore saveWill;
-	
-	public CombatStatistics(ModifiedScore hitPoints, ModifiedScore initiative,
-			int speedLand, int speedSwim, int speedClimb, int speedFly,
-			int speedBurrow, int armourClass, int armourClassTouch,
-			int armourClassFlatFooted, ModifiedScore saveFortitude,
-			ModifiedScore saveReflex, ModifiedScore saveWill) 
-	{
+
+	public CombatEntity(int difficultyChallenge, ModifiedScore hitPoints,
+			ModifiedScore initiative, int speedLand, int speedSwim,
+			int speedClimb, int speedFly, int speedBurrow, int armourClass,
+			int armourClassTouch, int armourClassFlatFooted,
+			ModifiedScore saveFortitude, ModifiedScore saveReflex,
+			ModifiedScore saveWill) {
+		super();
+		this.difficultyChallenge = difficultyChallenge;
 		this.hitPoints = hitPoints;
 		this.initiative = initiative;
 		this.speedLand = speedLand;
