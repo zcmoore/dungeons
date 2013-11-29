@@ -1,6 +1,5 @@
 package edu.asu.ser215.pathfinder.character;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -18,7 +17,7 @@ import java.util.HashMap;
  *      Pathfinders guide on Abilities</a>
  *
  */
-public class AbilityType implements Comparable<AbilityType>
+public class AbilityType extends ScoreType
 {
 	/**
 	 * Exception thrown when an attempt is made to add a duplicate abbreviation
@@ -62,9 +61,6 @@ public class AbilityType implements Comparable<AbilityType>
 	private static int currentIndex = 0;
 	
 	protected String abbreviation;
-	protected String name;
-	/**the index reference for arrays that have a value for each AbilityType*/
-	protected int index;
 	
 	/**
 	 * Private constructor to prevent unmapped and/or duplicate instances.
@@ -164,14 +160,7 @@ public class AbilityType implements Comparable<AbilityType>
 	 */
 	public static AbilityType[] getAbilityTypes()
 	{
-		//create and populate array of all abilityTypes
-		AbilityType[] abilityTypes = abilityTypeNameMap.values().toArray
-				(new AbilityType[abilityTypeNameMap.size()]);
-		
-		//sort by index
-		Arrays.sort(abilityTypes);
-		
-		return abilityTypes;
+		return ScoreType.getScoreTypes(abilityTypeNameMap, new AbilityType[abilityTypeNameMap.size()]);
 	}
 	
 	public static int getNumberOfAbilityTypes()
@@ -179,44 +168,19 @@ public class AbilityType implements Comparable<AbilityType>
 		return currentIndex;
 	}
 	
-	public static int indexOf(String abilityName) throws UnmappedException
-	{
-		int index;
-		AbilityType abilityType = abilityTypeNameMap.get(abilityName);
-		
-		if (abilityType == null)
-			throw new UnmappedException("ability type not found");
-		else
-		{
-			index = abilityType.getIndex();
-		}
-		
-		return index;
+	public static int search(String abilityName) throws UnmappedException
+	{	
+		return ScoreType.indexOf(abilityTypeNameMap, abilityName);
+	}
+	
+	public int indexOf(String abilityName) throws UnmappedException
+	{		
+		return ScoreType.indexOf(abilityTypeNameMap, abilityName);
 	}
 
 	public String getAbbreviation() 
 	{
 		return abbreviation;
-	}
-
-	public String getName() 
-	{
-		return name;
-	}
-
-	public int getIndex() 
-	{
-		return index;
-	}
-
-	
-	@Override
-	public int compareTo(AbilityType comparisonType) 
-	{
-		//if this id is less than the comparison id, return <0; 
-		//if ids are equal, return =0
-		//if id of this object is greater than the comparison id, return >0
-		return this.index - comparisonType.index;
 	}
 	
 	

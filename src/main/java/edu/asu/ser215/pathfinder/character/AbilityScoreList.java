@@ -47,7 +47,7 @@ public class AbilityScoreList
 	
 	public AbilityScore getAbilityScore(String abilityName) throws UnmappedException
 	{
-		return getAbilityScoreAt(AbilityType.indexOf(abilityName));
+		return getAbilityScoreAt(AbilityType.search(abilityName));
 	}
 	
 	public AbilityScore getAbilityScore(AbilityType type)

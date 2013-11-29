@@ -46,9 +46,9 @@ public class SkillScoreList
 		return skillScores[index];
 	}
 	
-	public SkillScore getAbilityScore(String abilityName) throws UnmappedException
+	public SkillScore getSkillScore(String skillName) throws UnmappedException
 	{
-		return getSkillScoreAt(AbilityType.indexOf(abilityName));
+		return getSkillScoreAt(SkillType.search(skillName));
 	}
 	
 	public SkillScore getSkillScore(SkillType type)

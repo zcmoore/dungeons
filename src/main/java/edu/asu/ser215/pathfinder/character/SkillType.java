@@ -1,8 +1,6 @@
 package edu.asu.ser215.pathfinder.character;
 
-import java.util.Arrays;
 import java.util.HashMap;
-
 import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
 
 /**
@@ -20,16 +18,12 @@ import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
  *      Pathfinders guide on Skills</a>
  *
  */
-public class SkillType implements Comparable<SkillType>
+public class SkillType extends ScoreType
 {
 	/**Maps all skill types using name as the key*/
 	private static HashMap<String, SkillType> skillTypeMap = new HashMap<>();
 	private static int currentIndex = 0; /*Represents the current number of 
 										SkillType objects in abilityTypeMap*/
-	
-	protected String name;
-	protected int index;  /*the index reference for arrays that 
-							have a value for each SkillType*/
 	
 	/**
 	 * Private constructor to prevent unmapped and/or duplicate instances.
@@ -74,14 +68,7 @@ public class SkillType implements Comparable<SkillType>
 	 */
 	public static SkillType[] getSkillTypes()
 	{
-		//create and populate array of all abilityTypes
-		SkillType[] skillTypes = skillTypeMap.values().toArray
-				(new SkillType[skillTypeMap.size()]);
-		
-		//sort by index
-		Arrays.sort(skillTypes);
-		
-		return skillTypes;
+		return ScoreType.getScoreTypes(skillTypeMap, new SkillType[skillTypeMap.size()]);
 	}
 	
 	public static int getNumberOfSkillTypes()
@@ -89,19 +76,17 @@ public class SkillType implements Comparable<SkillType>
 		return currentIndex;
 	}
 	
-	public static int indexOf(String skillName) throws UnmappedException
-	{
-		int index;
-		SkillType skillType = skillTypeMap.get(skillName);
-		
-		if (skillType == null)
-			throw new UnmappedException("skill type not found");
-		else
-		{
-			index = skillType.getIndex();
-		}
-		
-		return index;
+	/**
+	 * This is equivalent to a call to {@link #indexOf(String)}
+	 * Returns the index of the desired skill. If no matching skill is found,
+	 * UnmappedException will be thrown
+	 * 
+	 * @param skillName		the desired skill name
+	 * @return				the index of the desired skill
+	 */
+	public static int search(String skillName) throws UnmappedException
+	{	
+		return ScoreType.indexOf(skillTypeMap, skillName);
 	}
 
 	public String getName() 
@@ -113,15 +98,10 @@ public class SkillType implements Comparable<SkillType>
 	{
 		return index;
 	}
-	
+
 	@Override
-	public int compareTo(SkillType comparisonType) 
+	public int indexOf(String skillName) throws UnmappedException 
 	{
-		//if this id is less than the comparison id, return <0; 
-		//if ids are equal, return =0
-		//if id of this object is greater than the comparison id, return >0
-		return this.index - comparisonType.index;
+		return ScoreType.indexOf(skillTypeMap, skillName);
 	}
-	
-	
 }
