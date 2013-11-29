@@ -23,7 +23,7 @@ import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
 public class SkillType implements Comparable<SkillType>
 {
 	/**Maps all skill types using name as the key*/
-	private static HashMap<String, SkillType> skillTypeMap;
+	private static HashMap<String, SkillType> skillTypeMap = new HashMap<>();
 	private static int currentIndex = 0; /*Represents the current number of 
 										SkillType objects in abilityTypeMap*/
 	
