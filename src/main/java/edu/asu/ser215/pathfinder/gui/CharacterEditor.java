@@ -20,6 +20,12 @@ import java.awt.Button;
 
 public class CharacterEditor extends JFrame {
 	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 
 	public CharacterEditor() throws HeadlessException {
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
@@ -62,6 +68,99 @@ public class CharacterEditor extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("General", null, panel_2, null);
+		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblSize = new JLabel("Size");
+		lblSize.setHorizontalAlignment(SwingConstants.LEFT);
+		lblSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblSize, "2, 2, right, default");
+		
+		JComboBox comboBox_3 = new JComboBox();
+		panel_2.add(comboBox_3, "4, 2, fill, default");
+		
+		JLabel lblHeight = new JLabel("Height");
+		lblHeight.setHorizontalAlignment(SwingConstants.LEFT);
+		lblHeight.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblHeight, "2, 4, right, default");
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		panel_2.add(textField_6, "4, 4, fill, default");
+		
+		JLabel lblWeight = new JLabel("Weight");
+		lblWeight.setHorizontalAlignment(SwingConstants.LEFT);
+		lblWeight.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblWeight, "2, 6, right, default");
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		panel_2.add(textField_5, "4, 6, fill, default");
+		
+		JLabel lblHair = new JLabel("Hair");
+		lblHair.setHorizontalAlignment(SwingConstants.LEFT);
+		lblHair.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblHair, "2, 8, right, default");
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		panel_2.add(textField_4, "4, 8, fill, default");
+		
+		JLabel lblEyes = new JLabel("Eyes");
+		lblEyes.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEyes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblEyes, "2, 10, right, default");
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		panel_2.add(textField_3, "4, 10, fill, default");
+		
+		JLabel lblAge = new JLabel("Age");
+		lblAge.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblAge, "2, 12, right, default");
+		
+		textField_2 = new JTextField();
+		panel_2.add(textField_2, "4, 12, fill, default");
+		textField_2.setColumns(10);
+		
+		JLabel lblHomeland = new JLabel("Homeland");
+		lblHomeland.setHorizontalAlignment(SwingConstants.LEFT);
+		lblHomeland.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblHomeland, "2, 14, right, default");
+		
+		textField_1 = new JTextField();
+		panel_2.add(textField_1, "4, 14, fill, default");
+		textField_1.setColumns(10);
+		
+		JLabel lblGender = new JLabel("Gender");
+		lblGender.setHorizontalAlignment(SwingConstants.LEFT);
+		lblGender.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblGender, "2, 16, right, default");
+		
+		JComboBox comboBox_2 = new JComboBox();
+		panel_2.add(comboBox_2, "4, 16, fill, default");
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Abilities", null, panel, null);
