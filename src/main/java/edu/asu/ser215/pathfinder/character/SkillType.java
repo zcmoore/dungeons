@@ -1,7 +1,6 @@
 package edu.asu.ser215.pathfinder.character;
 
 import java.util.HashMap;
-import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
 
 /**
  * Each SkillType is mapped upon instantiation, and will be unique. This class
@@ -20,6 +19,8 @@ import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
  */
 public class SkillType extends ScoreType
 {
+	public static final int DEFAULT_SCORE = 10;
+	
 	/**Maps all skill types using name as the key*/
 	private static HashMap<String, SkillType> skillTypeMap = new HashMap<>();
 	private static int currentIndex = 0; /*Represents the current number of 
@@ -89,19 +90,36 @@ public class SkillType extends ScoreType
 		return ScoreType.indexOf(skillTypeMap, skillName);
 	}
 
-	public String getName() 
-	{
-		return name;
-	}
-
-	public int getIndex() 
-	{
-		return index;
-	}
-
 	@Override
 	public int indexOf(String skillName) throws UnmappedException 
 	{
 		return ScoreType.indexOf(skillTypeMap, skillName);
+	}
+	
+	@Override
+	public int calculateModifier(SpecifiedScore<?> score) throws IllegalArgumentException
+	{
+		SkillScore castedScore;
+		
+		//SkillType can only calculate SkillScore. If the given parameter is not
+		//a SkillScore, throw an exception.
+		if ((score instanceof SkillScore))
+			castedScore = (SkillScore) score;
+		else
+			throw new IllegalArgumentException();
+		
+		int newModifier = ModifiedScore.calculateModifier(castedScore);
+		
+		//if this skill is trained and has at least one rank, it receives a bonus
+		if (castedScore.trained && (castedScore.rawScore > 0))
+			newModifier += SkillScore.TRAINED_BONUS;
+		
+		return newModifier;
+	}
+
+	@Override
+	public int getDefaultScore()
+	{
+		return DEFAULT_SCORE;
 	}
 }

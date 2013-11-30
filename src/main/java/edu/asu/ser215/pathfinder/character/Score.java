@@ -19,8 +19,13 @@ public abstract class Score
 	protected int modifiedScore;
 	protected int modifier;
 	
-	protected abstract int recalculateModifiedScore();
 	protected abstract int recalculateModifier();
+	
+	protected final int recalculateModifiedScore()
+	{
+		this.modifiedScore = this.rawScore + this.scoreBonus;
+		return this.modifiedScore;
+	}
 	
 	protected Score(int initialScore, int initialBonus, boolean calculateDependentValues)
 	{

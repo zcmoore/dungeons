@@ -1,38 +1,37 @@
 package edu.asu.ser215.pathfinder.character;
 
-public class ModifiedScore extends Score 
+public class ModifiedScore extends Score implements Modified
 {
-	protected AbilityScore modifyingAbility;
+	protected SpecifiedScore<?> modifyingScore;
 	
 	public ModifiedScore(int initialScore, int initialBonus, 
-			AbilityScore modifyingAbility) 
+			SpecifiedScore<?> modifyingAbility) 
 	{
 		super(initialScore, initialBonus, false);
-		this.modifyingAbility = modifyingAbility;
+		this.modifyingScore = modifyingAbility;
 		calculateDependentValues();
-	}
-
-	@Override
-	protected int recalculateModifiedScore()
-	{
-		this.modifiedScore = this.rawScore + this.scoreBonus;
-		return this.modifiedScore;
 	}
 
 	@Override
 	protected int recalculateModifier()
 	{
-		this.modifier += this.modifyingAbility.getModifier();
+		this.modifier = calculateModifier(this);
 		return this.modifier;
 	}
-
-	public AbilityScore getModifyingAbility()
+	
+	public static <T extends Score & Modified> int calculateModifier(T score)
 	{
-		return modifyingAbility;
+		return score.modifiedScore +  score.getModifyingScore().getModifier();
 	}
 	
 	public int getValue()
 	{
 		return this.modifier;
+	}
+
+	@Override
+	public Score getModifyingScore()
+	{
+		return modifyingScore;
 	}
 }
