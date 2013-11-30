@@ -1,33 +1,37 @@
 package edu.asu.ser215.pathfinder.character;
 
 import java.util.ArrayList;
-import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
 
+import edu.asu.ser215.pathfinder.character.ScoreType.UnmappedException;
+
+//TODO combine SkillScoreList and AbilityScoreList
 public class AbilityScoreList 
 {
-	protected AbilityScore[] abilityScores;
+	protected SpecifiedScore<AbilityType>[] abilityScores;
 	
+	@SuppressWarnings("unchecked")
 	public AbilityScoreList()
 	{
 		AbilityType[] abilities = AbilityType.getAbilityTypes();
 		int numberOfAbilities = abilities.length;
-		this.abilityScores = new AbilityScore[numberOfAbilities];
+		this.abilityScores = new SpecifiedScore[numberOfAbilities];
 		
 		//populate abilityScores array with default scores
 		for (int index = 0; index < numberOfAbilities; index++)
 		{
-			this.abilityScores[index] = new AbilityScore(abilities[index]);
+			this.abilityScores[index] = new SpecifiedScore<AbilityType>(AbilityType.DEFAULT_SCORE, 0, abilities[index]);
 		}
 	}
 	
-	public AbilityScoreList(AbilityScore... abilitiyScoreValues)
+	@SafeVarargs
+	public AbilityScoreList(SpecifiedScore<AbilityType>... abilitiyScoreValues)
 	{
 		this();
 		
 		//TODO eliminate double loop; optimize
-		for (AbilityScore abilityScore : abilitiyScoreValues)
+		for (SpecifiedScore<AbilityType> abilityScore : abilitiyScoreValues)
 		{
-			int index = abilityScore.getAbilityType().getIndex();
+			int index = abilityScore.getScoreType().getIndex();
 			this.abilityScores[index] = abilityScore;
 		}
 	}
@@ -35,22 +39,23 @@ public class AbilityScoreList
 	/**
 	 * @see #AbilityScoreList(AbilityScore...)
 	 */
-	public AbilityScoreList(ArrayList<AbilityScore> abilityScoreValues)
+	@SuppressWarnings("unchecked")
+	public AbilityScoreList(ArrayList<SpecifiedScore<AbilityType>> abilityScoreValues)
 	{
-		this(abilityScoreValues.toArray(new AbilityScore[abilityScoreValues.size()]));
+		this(abilityScoreValues.toArray(new SpecifiedScore[abilityScoreValues.size()]));
 	}
 	
-	public AbilityScore getAbilityScoreAt(int index)
+	public SpecifiedScore<AbilityType> getAbilityScoreAt(int index)
 	{
 		return abilityScores[index];
 	}
 	
-	public AbilityScore getAbilityScore(String abilityName) throws UnmappedException
+	public SpecifiedScore<AbilityType> getAbilityScore(String abilityName) throws UnmappedException
 	{
 		return getAbilityScoreAt(AbilityType.search(abilityName));
 	}
 	
-	public AbilityScore getAbilityScore(AbilityType type)
+	public SpecifiedScore<AbilityType> getAbilityScore(AbilityType type)
 	{
 		return abilityScores[type.index];
 	}

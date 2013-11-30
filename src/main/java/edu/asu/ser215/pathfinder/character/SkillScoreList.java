@@ -1,7 +1,7 @@
 package edu.asu.ser215.pathfinder.character;
 
 import java.util.ArrayList;
-import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
+import edu.asu.ser215.pathfinder.character.ScoreType.UnmappedException;
 
 //TODO combine SkillScoreList and AbilityScoreList
 public class SkillScoreList 
@@ -17,7 +17,8 @@ public class SkillScoreList
 		//populate skillScores array with default scores
 		for (int index = 0; index < numberOfAbilities; index++)
 		{
-			this.skillScores[index] = new SkillScore(skills[index]);
+			//TODO critical
+			//this.skillScores[index] = new SkillScore(skills[index]);
 		}
 	}
 	

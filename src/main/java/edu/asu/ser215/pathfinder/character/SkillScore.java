@@ -1,43 +1,33 @@
 package edu.asu.ser215.pathfinder.character;
 
-public class SkillScore extends ModifiedScore 
+public class SkillScore extends SpecifiedScore<SkillType> implements Modified
 {
 	public static final int TRAINED_BONUS = 3;
-	protected SkillType skillType;
+	protected SpecifiedScore<AbilityType> modifyingAbility;
 	protected boolean trained;
-	
-	public SkillScore(SkillType skillType) 
+
+	public SkillScore(int initialScore, int initialBonus, SkillType scoreType,
+			SpecifiedScore<AbilityType> modifyingAbility, boolean trained)
 	{
-		//TODO add handling in all code for null modifyingAbility
-		this(skillType, false, 0, 0, null);
-	}
-	
-	public SkillScore(SkillType skillType, boolean trained, int initialScore, 
-			int initialBonus, AbilityScore modifyingAbility) 
-	{
-		super(initialScore, initialBonus, modifyingAbility);
-		this.skillType = skillType;
+		super(initialScore, initialBonus, false, scoreType);
+		this.modifyingAbility = modifyingAbility;
 		this.trained = trained;
-	}
-	
-	@Override
-	protected int recalculateModifier()
-	{
-		this.modifier = super.recalculateModifier();
 		
-		//if this skill is trained and has at least one rank, it receives a bonus
-		if (trained && (this.rawScore > 0))
-				this.modifier += TRAINED_BONUS;
-		
-		return this.modifier;
+		calculateDependentValues();
 	}
 
 	public SkillType getSkillType() {
-		return skillType;
+		return this.scoreType;
 	}
 
 	public boolean isTrained() {
 		return trained;
+	}
+
+	@Override
+	public Score getModifyingScore()
+	{
+		return modifyingAbility;
 	}
 	
 	

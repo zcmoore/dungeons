@@ -3,15 +3,49 @@ package edu.asu.ser215.pathfinder.character;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import edu.asu.ser215.pathfinder.character.AbilityType.UnmappedException;
-
 public abstract class ScoreType implements Comparable<ScoreType>
 {
+	/**
+	 * Exception thrown when an attempt is made to add a duplicate abbreviation
+	 * to the abbreviation map
+	 * 
+	 * @author Zach Moore
+	 *
+	 */
+	protected static class NotUniqueException extends Exception
+	{
+		private static final long serialVersionUID = 1L;
+
+		public NotUniqueException(String message)
+		{
+			super(message);
+		}
+	}
+	
+	/**
+	 * Exception thrown when an attempt is made to access a ScoreType that
+	 * does not exist or has not been mapped
+	 * 
+	 * @author Zach Moore
+	 *
+	 */
+	public static class UnmappedException extends Exception
+	{
+		private static final long serialVersionUID = 1L;
+
+		public UnmappedException(String message)
+		{
+			super(message);
+		}
+	}
+	
 	protected String name;
 	protected int index; /*the index reference for arrays that 
 							have a value for each SkillType*/
-	
+		
 	public abstract int indexOf(String typeName) throws UnmappedException;
+	public abstract int calculateModifier(SpecifiedScore<?> score) throws IllegalArgumentException;
+	public abstract int getDefaultScore();
 	
 	protected static <T extends ScoreType> int indexOf(HashMap<String, T> scoreTypeMap, String scoreName) throws UnmappedException
 	{

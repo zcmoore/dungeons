@@ -19,39 +19,9 @@ import java.util.HashMap;
  */
 public class AbilityType extends ScoreType
 {
-	/**
-	 * Exception thrown when an attempt is made to add a duplicate abbreviation
-	 * to the abbreviation map
-	 * 
-	 * @author Zach Moore
-	 *
-	 */
-	private static class NotUniqueException extends Exception
-	{
-		private static final long serialVersionUID = 1L;
-
-		public NotUniqueException(String message)
-		{
-			super(message);
-		}
-	}
-	
-	/**
-	 * Exception thrown when an attempt is made to access an AbilityType that
-	 * does not exist or has not been mapped
-	 * 
-	 * @author Zach Moore
-	 *
-	 */
-	public static class UnmappedException extends Exception
-	{
-		private static final long serialVersionUID = 1L;
-
-		public UnmappedException(String message)
-		{
-			super(message);
-		}
-	}
+	public static final int DEFAULT_SCORE = 10;
+	public static final int BASE_VALUE = 10; //the value at which the modifier obtained will be 0
+	public static final int DELTA_VALUE = 2; //modifier = (modifiedValue - baseValue)/delta
 	
 	/**Maps all ability types. The abbreviation of each ability is used as a key*/
 	private static HashMap<String, AbilityType> abilityTypeAbbreviationMap = new HashMap<>();
@@ -181,6 +151,28 @@ public class AbilityType extends ScoreType
 	public String getAbbreviation() 
 	{
 		return abbreviation;
+	}
+	
+
+	@Override
+	public int calculateModifier(SpecifiedScore<?> score) {
+		//Example: if baseValue = 10, and deltaValue = 2
+		//if modifiedScore = 10 or 11, return 0
+		//if modifiedScore = 12 or 13, return 1
+		//return 2 for 14 or 15; 3 for 16 or 17, etc.
+		//9 and 8 return -1; 7 returns -2
+		int newModifier = score.modifiedScore - BASE_VALUE;
+		if (newModifier < 0)
+			newModifier -= (DELTA_VALUE - 1);
+		
+		newModifier /= DELTA_VALUE;
+		return newModifier;
+	}
+
+	@Override
+	public int getDefaultScore()
+	{
+		return DEFAULT_SCORE;
 	}
 	
 	
