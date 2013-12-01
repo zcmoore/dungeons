@@ -13,7 +13,7 @@ public class Race
 	private static HashMap<String, Race> raceMap;
 
 	private String name;
-	private ScoreList<AbilityType> abilities;
+	private ScoreList<Ability> abilities;
 	private Race.Size size;
 	private int ac_modifier; // Armor class modifier
 	private double space; // Amount of space on the board
@@ -26,7 +26,8 @@ public class Race
 	 * @author Moon, Seth
 	 * 
 	 */
-	public static enum Size {
+	public static enum Size
+	{
 		FINE(8, .5, 0),
 		DIMINUTIVE(4, 2, 0),
 		TINY(2, 2.5, 0),
@@ -57,7 +58,7 @@ public class Race
 	 * @param space Amount of space on the board.
 	 */
 	private Race(
-			String name, ScoreList<AbilityType> abilities, Race.Size size,
+			String name, ScoreList<Ability> abilities, Race.Size size,
 			int ac_modifier, double space, int natural_reach) {
 		this.name = name;
 		this.abilities = abilities;
@@ -77,7 +78,7 @@ public class Race
 	 * @param natural_reach How far the race can reach
 	 */
 	public static void add(
-			String name, ScoreList<AbilityType> abilities, Race.Size size,
+			String name, ScoreList<Ability> abilities, Race.Size size,
 			int ac_modifier, double space, int natural_reach) {
 		if(raceMap == null)
 			raceMap = new HashMap<String, Race>();
@@ -93,7 +94,7 @@ public class Race
 	 * @see Race#add(String, Ability, Size, int, double, int)
 	 */
 	public static void add(
-			String name, ScoreList<AbilityType> abilities, Race.Size size) {
+			String name, ScoreList<Ability> abilities, Race.Size size) {
 		Race.add(name, abilities, size, size.ac_modifier, size.space, size.natural_reach);
 	}
 	
@@ -114,7 +115,7 @@ public class Race
 		return name;
 	}
 	
-	public ScoreList<AbilityType> getAbilities() {
+	public ScoreList<Ability> getAbilities() {
 		return abilities;
 	}
 	

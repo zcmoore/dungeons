@@ -14,14 +14,14 @@ public class ScoreList<T extends ScoreType>
 	{
 		public EmptyScoreType()
 		{
-			super();
+			super("EmptyScore", 0);
 		}
 
 		@Override
 		public int calculateModifier(SpecifiedScore<?> score)
 				throws IllegalArgumentException 
 		{
-			// TODO Auto-generated method stub
+			//EmptyScore has a +0 modifier
 			return 0;
 		}
 	}

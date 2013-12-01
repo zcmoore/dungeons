@@ -17,21 +17,21 @@ import java.util.HashMap;
  *      Pathfinders guide on Skills</a>
  *
  */
-public class SkillType extends ScoreType
+public class Skill extends ScoreType
 {
-	public static SpecifiedScore<AbilityType> DEFAULT_MODIFYING_ABILITY = createDefaultModifyingAbility();
+	public static SpecifiedScore<Ability> DEFAULT_MODIFYING_ABILITY = createDefaultModifyingAbility();
 	public static final int DEFAULT_SCORE = 0;
 	public static final int DEFAULT_BONUS = 0;
 	
 	/**Maps all skill types using name as the key*/
-	private static HashMap<String, SkillType> skillTypeMap = new HashMap<>();
+	private static HashMap<String, Skill> skillTypeMap = new HashMap<>();
 	private static int currentIndex = 0; /*Represents the current number of 
 										SkillType objects in abilityTypeMap*/
 	
-	private static SpecifiedScore<AbilityType> createDefaultModifyingAbility()
+	private static SpecifiedScore<Ability> createDefaultModifyingAbility()
 	{
-		return new SpecifiedScore<AbilityType>(AbilityType.DEFAULT_SCORE, AbilityType.DEFAULT_BONUS, 
-				AbilityType.constructAbilityType("Default"));
+		return new SpecifiedScore<Ability>(Ability.DEFAULT_SCORE, Ability.DEFAULT_BONUS, 
+				Ability.constructAbilityType("Default"));
 	}
 	
 	/**
@@ -39,10 +39,9 @@ public class SkillType extends ScoreType
 	 * The current index will be assigned to the new object, and the index will
 	 * be incremented.
 	 */
-	private SkillType(String name)
+	private Skill(String name)
 	{
-		this.name = name;
-		this.index = currentIndex;
+		super(name, currentIndex);
 		currentIndex++;
 	}
 	
@@ -52,16 +51,16 @@ public class SkillType extends ScoreType
 	 * 
 	 * @param name	name of the desired skill
 	 */
-	public static SkillType constructSkillType(String name)
+	public static Skill constructSkillType(String name)
 	{
 		//fetch skill from skillMap
-		SkillType returnObject = skillTypeMap.get(name);
+		Skill returnObject = skillTypeMap.get(name);
 		
 		//if map did not contain the skill, create and map the skill
 		if (returnObject == null)
 		{
 			//create new SkillType
-			returnObject = new SkillType(name);
+			returnObject = new Skill(name);
 			
 			//map the new object using its name as a key
 			skillTypeMap.put(name, returnObject);
@@ -76,15 +75,15 @@ public class SkillType extends ScoreType
 	 * @return sorted array of all SkillType objects
 	 */
 	@SuppressWarnings("unchecked")
-	public static SkillType[] getScoreTypes()
+	public static Skill[] getScoreTypes()
 	{
-		return ScoreType.getScoreTypes(skillTypeMap, new SkillType[skillTypeMap.size()]);
+		return ScoreType.getScoreTypes(skillTypeMap, new Skill[skillTypeMap.size()]);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
 	{
-		SkillType[] skillTypes = getScoreTypes();
+		Skill[] skillTypes = getScoreTypes();
 		SkillScore[] defaultScores = new SkillScore[skillTypes.length];
 		
 		for (int index = 0; index < defaultScores.length; index++)

@@ -1,6 +1,6 @@
 package edu.asu.ser215.pathfinder.character;
 
-public class CombatEntity 
+public class CombatEntity extends AnimateEntity
 {
 	public static final int DEFAULT_HIT_POINTS = 10;
 	
@@ -18,14 +18,14 @@ public class CombatEntity
 	protected ModifiedScore saveFortitude;
 	protected ModifiedScore saveReflex;
 	protected ModifiedScore saveWill;
-
-	public CombatEntity(int difficultyChallenge, ModifiedScore hitPoints,
-			ModifiedScore initiative, int speedLand, int speedSwim,
-			int speedClimb, int speedFly, int speedBurrow, int armourClass,
-			int armourClassTouch, int armourClassFlatFooted,
+	
+	public CombatEntity(String name, int difficultyChallenge,
+			ModifiedScore hitPoints, ModifiedScore initiative, int speedLand,
+			int speedSwim, int speedClimb, int speedFly, int speedBurrow,
+			int armourClass, int armourClassTouch, int armourClassFlatFooted,
 			ModifiedScore saveFortitude, ModifiedScore saveReflex,
 			ModifiedScore saveWill) {
-		super();
+		super(name);
 		this.difficultyChallenge = difficultyChallenge;
 		this.hitPoints = hitPoints;
 		this.initiative = initiative;
@@ -40,6 +40,14 @@ public class CombatEntity
 		this.saveFortitude = saveFortitude;
 		this.saveReflex = saveReflex;
 		this.saveWill = saveWill;
+	}
+
+	public int getDifficultyChallenge() {
+		return difficultyChallenge;
+	}
+
+	public void setDifficultyChallenge(int difficultyChallenge) {
+		this.difficultyChallenge = difficultyChallenge;
 	}
 
 	public ModifiedScore getHitPoints() {
@@ -145,6 +153,8 @@ public class CombatEntity
 	public void setSaveWill(ModifiedScore saveWill) {
 		this.saveWill = saveWill;
 	}
+	
+	
 	
 	
 }
