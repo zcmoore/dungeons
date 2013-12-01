@@ -139,6 +139,8 @@ public abstract class ItemData
             primitiveClass = Byte.TYPE;
         else if ((objectClass.equals(Character.class)))
             primitiveClass = Character.TYPE;
+        else
+        	primitiveClass = objectClass;
         
         return primitiveClass;
     }

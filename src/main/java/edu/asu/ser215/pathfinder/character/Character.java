@@ -6,8 +6,8 @@ public class Character extends CombatEntity
 {
 	protected String name;
 	protected CharacterLevel level;
-	protected AbilityScoreList abilityScores;
-	protected SkillScoreList skillScores;
+	protected ScoreList<AbilityType> abilityScores;
+	protected ScoreList<SkillType> skillScores;
 	protected ArrayList<CharacterClass> classes;
 	protected CharacterAlignment alignment;
 	protected Race race;
@@ -19,14 +19,15 @@ public class Character extends CombatEntity
 	protected String hairColour;
 	protected String eyeColour;
 	//TODO add protected Location homeLand;
-	
+
 	public Character(int difficultyChallenge, ModifiedScore hitPoints,
 			ModifiedScore initiative, int speedLand, int speedSwim,
 			int speedClimb, int speedFly, int speedBurrow, int armourClass,
 			int armourClassTouch, int armourClassFlatFooted,
 			ModifiedScore saveFortitude, ModifiedScore saveReflex,
 			ModifiedScore saveWill, String name, CharacterLevel level,
-			AbilityScoreList abilityScores, SkillScoreList skillScores,
+			ScoreList<AbilityType> abilityScores,
+			ScoreList<SkillType> skillScores,
 			ArrayList<CharacterClass> classes, CharacterAlignment alignment,
 			Race race, String deity, String gender, int age, int height,
 			int weight, String hairColour, String eyeColour) {
@@ -66,19 +67,19 @@ public class Character extends CombatEntity
 		this.level = level;
 	}
 
-	public AbilityScoreList getAbilityScores() {
+	public ScoreList<AbilityType> getAbilityScores() {
 		return abilityScores;
 	}
 
-	public void setAbilityScores(AbilityScoreList abilityScores) {
+	public void setAbilityScores(ScoreList<AbilityType> abilityScores) {
 		this.abilityScores = abilityScores;
 	}
 
-	public SkillScoreList getSkillScores() {
+	public ScoreList<SkillType> getSkillScores() {
 		return skillScores;
 	}
 
-	public void setSkillScores(SkillScoreList skillScores) {
+	public void setSkillScores(ScoreList<SkillType> skillScores) {
 		this.skillScores = skillScores;
 	}
 

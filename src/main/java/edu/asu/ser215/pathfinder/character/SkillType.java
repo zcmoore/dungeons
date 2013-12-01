@@ -19,12 +19,20 @@ import java.util.HashMap;
  */
 public class SkillType extends ScoreType
 {
-	public static final int DEFAULT_SCORE = 10;
+	public static SpecifiedScore<AbilityType> DEFAULT_MODIFYING_ABILITY = createDefaultModifyingAbility();
+	public static final int DEFAULT_SCORE = 0;
+	public static final int DEFAULT_BONUS = 0;
 	
 	/**Maps all skill types using name as the key*/
 	private static HashMap<String, SkillType> skillTypeMap = new HashMap<>();
 	private static int currentIndex = 0; /*Represents the current number of 
 										SkillType objects in abilityTypeMap*/
+	
+	private static SpecifiedScore<AbilityType> createDefaultModifyingAbility()
+	{
+		return new SpecifiedScore<AbilityType>(AbilityType.DEFAULT_SCORE, AbilityType.DEFAULT_BONUS, 
+				AbilityType.constructAbilityType("Default"));
+	}
 	
 	/**
 	 * Private constructor to prevent unmapped and/or duplicate instances.
@@ -67,33 +75,36 @@ public class SkillType extends ScoreType
 	 * 
 	 * @return sorted array of all SkillType objects
 	 */
-	public static SkillType[] getSkillTypes()
+	@SuppressWarnings("unchecked")
+	public static SkillType[] getScoreTypes()
 	{
 		return ScoreType.getScoreTypes(skillTypeMap, new SkillType[skillTypeMap.size()]);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
+	{
+		SkillType[] skillTypes = getScoreTypes();
+		SkillScore[] defaultScores = new SkillScore[skillTypes.length];
+		
+		for (int index = 0; index < defaultScores.length; index++)
+		{
+			//TODO add support for null modifyingType in SkillScore
+			defaultScores[index] = new SkillScore(skillTypes[index], DEFAULT_MODIFYING_ABILITY);
+		}
+		
+		return (T[]) defaultScores;
+	}
+	
+	public static int indexOf(String skillName) throws UnmappedException 
+	{
+		System.out.println("indexOf called from SkillType");
+		return ScoreType.indexOf(skillTypeMap, skillName);
 	}
 	
 	public static int getNumberOfSkillTypes()
 	{
 		return currentIndex;
-	}
-	
-	/**
-	 * This is equivalent to a call to {@link #indexOf(String)}
-	 * Returns the index of the desired skill. If no matching skill is found,
-	 * UnmappedException will be thrown
-	 * 
-	 * @param skillName		the desired skill name
-	 * @return				the index of the desired skill
-	 */
-	public static int search(String skillName) throws UnmappedException
-	{	
-		return ScoreType.indexOf(skillTypeMap, skillName);
-	}
-
-	@Override
-	public int indexOf(String skillName) throws UnmappedException 
-	{
-		return ScoreType.indexOf(skillTypeMap, skillName);
 	}
 	
 	@Override
@@ -115,11 +126,5 @@ public class SkillType extends ScoreType
 			newModifier += SkillScore.TRAINED_BONUS;
 		
 		return newModifier;
-	}
-
-	@Override
-	public int getDefaultScore()
-	{
-		return DEFAULT_SCORE;
 	}
 }
