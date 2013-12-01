@@ -3,6 +3,15 @@ package edu.asu.ser215.pathfinder.character;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * All child classes of ScoreType should implement the following static methods:
+ * 		public static int indexOf(String typeName)
+ * 		public static <T extends ScoreType> T[] getScoreTypes()
+ * 		public static <T extends SpecifiedScore<?>> T[] getDefaultScores()
+ * 
+ * @author Zach Moore
+ *
+ */
 public abstract class ScoreType implements Comparable<ScoreType>
 {
 	/**
@@ -39,13 +48,36 @@ public abstract class ScoreType implements Comparable<ScoreType>
 		}
 	}
 	
+	public static class NoMapException extends UnmappedException
+	{
+		private static final long serialVersionUID = 1L;
+
+		public NoMapException(String message)
+		{
+			super(message);
+		}
+	}
+	
 	protected String name;
 	protected int index; /*the index reference for arrays that 
 							have a value for each SkillType*/
-		
-	public abstract int indexOf(String typeName) throws UnmappedException;
+	
 	public abstract int calculateModifier(SpecifiedScore<?> score) throws IllegalArgumentException;
-	public abstract int getDefaultScore();
+	
+	protected static int indexOf(String typeName) throws UnmappedException
+	{
+		throw new NoMapException("Abstract class ScoreType does not map values.");
+	}
+	
+	protected static <T extends ScoreType> T[] getScoreTypes() throws NoMapException
+	{
+		throw new NoMapException("Abstract class ScoreType does not map values.");
+	}
+	
+	protected static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
+	{
+		throw new NoMapException("Abstract class ScoreType does not map values.");
+	}
 	
 	protected static <T extends ScoreType> int indexOf(HashMap<String, T> scoreTypeMap, String scoreName) throws UnmappedException
 	{
@@ -72,7 +104,7 @@ public abstract class ScoreType implements Comparable<ScoreType>
 		
 		return skillTypes;
 	}
-
+	
 	public String getName() {
 		return name;
 	}

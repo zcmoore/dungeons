@@ -20,6 +20,7 @@ import java.util.HashMap;
 public class AbilityType extends ScoreType
 {
 	public static final int DEFAULT_SCORE = 10;
+	public static final int DEFAULT_BONUS = 0;
 	public static final int BASE_VALUE = 10; //the value at which the modifier obtained will be 0
 	public static final int DELTA_VALUE = 2; //modifier = (modifiedValue - baseValue)/delta
 	
@@ -123,29 +124,39 @@ public class AbilityType extends ScoreType
 		return returnObject;
 	}
 	
+	public static int indexOf(String abilityName) throws UnmappedException
+	{		
+		return ScoreType.indexOf(abilityTypeNameMap, abilityName);
+	}
+	
 	/**
 	 * Returns a sorted list of abilityTypes, in order of their index
 	 * 
 	 * @return sorted array of all AbilityType objects
 	 */
-	public static AbilityType[] getAbilityTypes()
+	@SuppressWarnings("unchecked")
+	public static AbilityType[] getScoreTypes()
 	{
 		return ScoreType.getScoreTypes(abilityTypeNameMap, new AbilityType[abilityTypeNameMap.size()]);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
+	{
+		AbilityType[] abilityTypes = getScoreTypes();
+		SpecifiedScore<AbilityType>[] defaultScores = new SpecifiedScore[abilityTypes.length];
+		
+		for (int index = 0; index < defaultScores.length; index++)
+		{
+			defaultScores[index] = new SpecifiedScore<>(DEFAULT_SCORE, DEFAULT_BONUS, abilityTypes[index]);
+		}
+		
+		return (T[]) defaultScores;
 	}
 	
 	public static int getNumberOfAbilityTypes()
 	{
 		return currentIndex;
-	}
-	
-	public static int search(String abilityName) throws UnmappedException
-	{	
-		return ScoreType.indexOf(abilityTypeNameMap, abilityName);
-	}
-	
-	public int indexOf(String abilityName) throws UnmappedException
-	{		
-		return ScoreType.indexOf(abilityTypeNameMap, abilityName);
 	}
 
 	public String getAbbreviation() 
@@ -153,7 +164,6 @@ public class AbilityType extends ScoreType
 		return abbreviation;
 	}
 	
-
 	@Override
 	public int calculateModifier(SpecifiedScore<?> score) {
 		//Example: if baseValue = 10, and deltaValue = 2
@@ -167,12 +177,6 @@ public class AbilityType extends ScoreType
 		
 		newModifier /= DELTA_VALUE;
 		return newModifier;
-	}
-
-	@Override
-	public int getDefaultScore()
-	{
-		return DEFAULT_SCORE;
 	}
 	
 	

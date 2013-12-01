@@ -12,8 +12,10 @@ public class SpecifiedScore<T extends ScoreType> extends Score
 	protected SpecifiedScore(int initialScore, int initialBonus,
 			boolean calculateDependentValues, T scoreType)
 	{
-		super(initialScore, initialBonus, calculateDependentValues);
+		super(initialScore, initialBonus, false);
 		this.scoreType = scoreType;
+		if (calculateDependentValues)
+			calculateDependentValues();
 	}
 
 	@Override
