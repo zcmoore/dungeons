@@ -1,6 +1,17 @@
 package edu.asu.ser215.pathfinder.character;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * Each AbilityType is mapped upon instantiation, and will be unique. This class
@@ -19,6 +30,7 @@ import java.util.HashMap;
  */
 public class Ability extends ScoreType
 {
+	public static final String ABILITY_TAG = "ability";
 	public static final int DEFAULT_SCORE = 10;
 	public static final int DEFAULT_BONUS = 0;
 	public static final int BASE_VALUE = 10; //the value at which the modifier obtained will be 0
@@ -178,5 +190,46 @@ public class Ability extends ScoreType
 		return newModifier;
 	}
 	
+	public static boolean loadAbilities(File abilitiesFile)
+	{
+		boolean loadSuccessful = false;
+		try 
+		{
+			DocumentBuilder documentBuilder = 
+					DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document abilitiesDocument = documentBuilder.parse(abilitiesFile);
+			NodeList abilityNodes;
+			
+			//eliminate empty nodes and normalize document 
+			abilitiesDocument.getDocumentElement().normalize();
+			
+			//get ability nodes from document
+			abilityNodes = abilitiesDocument.getElementsByTagName(ABILITY_TAG);
+			
+			//parse nodes into ItemData objects, and add them to the list
+			for(int index = 0; index < abilityNodes.getLength(); index++)
+			{
+				Node currentNode = abilityNodes.item(index);
+				String abilityName = currentNode.getTextContent();
+				Ability.constructAbilityType(abilityName);
+				System.out.println("Ability Loaded: " + abilityName);
+			}
+			
+			loadSuccessful = true;
+			
+		} catch (ParserConfigurationException | SAXException | IOException e) 
+		{
+			e.printStackTrace();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return loadSuccessful;
+	}
 	
+	public String toString()
+	{
+		return this.name;
+	}
 }
