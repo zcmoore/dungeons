@@ -17,7 +17,7 @@ import java.util.HashMap;
  *      Pathfinders guide on Abilities</a>
  *
  */
-public class AbilityType extends ScoreType
+public class Ability extends ScoreType
 {
 	public static final int DEFAULT_SCORE = 10;
 	public static final int DEFAULT_BONUS = 0;
@@ -25,9 +25,9 @@ public class AbilityType extends ScoreType
 	public static final int DELTA_VALUE = 2; //modifier = (modifiedValue - baseValue)/delta
 	
 	/**Maps all ability types. The abbreviation of each ability is used as a key*/
-	private static HashMap<String, AbilityType> abilityTypeAbbreviationMap = new HashMap<>();
+	private static HashMap<String, Ability> abilityTypeAbbreviationMap = new HashMap<>();
 	/**Maps all ability types using name as the key*/
-	private static HashMap<String, AbilityType> abilityTypeNameMap = new HashMap<>();
+	private static HashMap<String, Ability> abilityTypeNameMap = new HashMap<>();
 	/**Represents the current number of AbilityType objects in abilityTypeMap*/
 	private static int currentIndex = 0;
 	
@@ -38,11 +38,10 @@ public class AbilityType extends ScoreType
 	 * The current index will be assigned to the new object, and the index will
 	 * be incremented.
 	 */
-	private AbilityType(String name, String abbreviation)
+	private Ability(String name, String abbreviation)
 	{
-		this.name = name;
+		super(name, currentIndex);
 		this.abbreviation = abbreviation;
-		this.index = currentIndex;
 		currentIndex++;
 	}
 	
@@ -65,7 +64,7 @@ public class AbilityType extends ScoreType
 	private static String generateUniqueAbbreviation(String name, int length) throws NotUniqueException
 	{
 		String abbreviation = name.substring(0, length);
-		AbilityType existingAbility = abilityTypeAbbreviationMap.get(abbreviation);
+		Ability existingAbility = abilityTypeAbbreviationMap.get(abbreviation);
 		
 		if (existingAbility == null)
 			return abbreviation; //found unique abbreviation
@@ -92,9 +91,9 @@ public class AbilityType extends ScoreType
 	 * 
 	 * @param name	name of the new attribute
 	 */
-	public static AbilityType constructAbilityType(String name)
+	public static Ability constructAbilityType(String name)
 	{
-		AbilityType returnObject = null;
+		Ability returnObject = null;
 		
 		try
 		{
@@ -104,7 +103,7 @@ public class AbilityType extends ScoreType
 				/*create an abbreviation. If an instance with this abbreviation 
 					already exists, then NotUniqueException will be thrown*/
 				String uniqueAbbreviation = generateUniqueAbbreviation(name);
-				returnObject = new AbilityType(name, uniqueAbbreviation);
+				returnObject = new Ability(name, uniqueAbbreviation);
 				
 				//Add unique AbilityType to both maps
 				abilityTypeAbbreviationMap.put(uniqueAbbreviation, returnObject);
@@ -135,16 +134,16 @@ public class AbilityType extends ScoreType
 	 * @return sorted array of all AbilityType objects
 	 */
 	@SuppressWarnings("unchecked")
-	public static AbilityType[] getScoreTypes()
+	public static Ability[] getScoreTypes()
 	{
-		return ScoreType.getScoreTypes(abilityTypeNameMap, new AbilityType[abilityTypeNameMap.size()]);
+		return ScoreType.getScoreTypes(abilityTypeNameMap, new Ability[abilityTypeNameMap.size()]);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
 	{
-		AbilityType[] abilityTypes = getScoreTypes();
-		SpecifiedScore<AbilityType>[] defaultScores = new SpecifiedScore[abilityTypes.length];
+		Ability[] abilityTypes = getScoreTypes();
+		SpecifiedScore<Ability>[] defaultScores = new SpecifiedScore[abilityTypes.length];
 		
 		for (int index = 0; index < defaultScores.length; index++)
 		{

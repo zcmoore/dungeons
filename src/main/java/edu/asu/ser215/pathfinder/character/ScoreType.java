@@ -58,9 +58,15 @@ public abstract class ScoreType implements Comparable<ScoreType>
 		}
 	}
 	
-	protected String name;
-	protected int index; /*the index reference for arrays that 
+	protected final String name;
+	protected final int index; /*the index reference for arrays that 
 							have a value for each SkillType*/
+	
+	protected ScoreType(String name, int index)
+	{
+		this.name = name;
+		this.index = index;
+	}
 	
 	public abstract int calculateModifier(SpecifiedScore<?> score) throws IllegalArgumentException;
 	
