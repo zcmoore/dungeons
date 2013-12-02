@@ -3,6 +3,7 @@ package edu.asu.ser215.pathfinder;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -16,14 +17,19 @@ public class Main extends StateBasedGame {
 	// List of Game States that should be initialized
 	// NOTE: These states MUST be added in the constructor first
 	// TODO: Class loading
-	public static final int[] GAME_STATES = { MainMenu.ID, GameBoard.ID };
+	public static final int[] GAME_STATES = { MainMenu.ID, GameBoard.ID, MapScreen.ID };
 	// Default Game State to enter upon launching the application
 	public static final int DEFAULT_GAME_STATE = MainMenu.ID;
 
 	public Main() {
 		super(GAME_TITLE);
 		this.addState(new MainMenu());
+		System.out.println(this.getStateCount());
 		this.addState(new GameBoard());
+		System.out.println(this.getStateCount());
+		this.addState(new MapScreen());
+		System.out.println(this.getStateCount());
+		
 		System.out.println("Constructor finished.");
 	}
 
@@ -39,7 +45,8 @@ public class Main extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		// Initialize all the game states
 		for (int state : Main.GAME_STATES) {
-			this.getState(state).init(container, this);
+			GameState g = this.getState(state);
+			g.init(container, this);
 		}
 		// Move to the default game state
 		this.enterState(Main.DEFAULT_GAME_STATE);

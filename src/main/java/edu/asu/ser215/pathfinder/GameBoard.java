@@ -4,7 +4,6 @@ import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
@@ -63,7 +62,7 @@ public class GameBoard extends BasicGameState implements ComponentListener {
 
 	@Override
 	public int getID() {
-		return GameBoard.ID;
+		return ID;
 	}
 
 }
