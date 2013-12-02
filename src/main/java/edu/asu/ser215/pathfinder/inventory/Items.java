@@ -397,11 +397,11 @@ public class Items
 	 * @param 	items	array of items for which to calculate the weight
 	 * @return	weight of all items in the given array; in pounds
 	 */
-	public static int calculateWeight(Item[] items)
+	public static int calculateWeight(Item<?>[] items)
 	{
 		int totalWeight = 0;
 		
-		for (Item item : items)
+		for (Item<?> item : items)
 		{
 			totalWeight += item.getData().getWeight();
 		}

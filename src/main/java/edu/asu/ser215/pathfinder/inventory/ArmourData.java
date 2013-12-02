@@ -78,7 +78,7 @@ public class ArmourData extends ItemData
 				+ arcaneFailureChance + ", speedLimitation20="
 				+ speedLimitation20 + ", speedLimitation30="
 				+ speedLimitation30 + ", name=" + name + ", type=" + type
-				+ ", cost=" + cost + ", weight=" + weight + ", description="
+				+ ", cost=" + baseCost + ", weight=" + weight + ", description="
 				+ description + "]";
 	}
 	

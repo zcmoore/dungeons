@@ -1,6 +1,8 @@
 package edu.asu.ser215.pathfinder.map;
 
+import java.awt.Dimension;
 import java.awt.Point;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
@@ -98,6 +100,11 @@ public abstract class Button
 	public void setCoordinates(Point coordinates) 
 	{
 		this.coordinates = coordinates;
+	}
+	
+	public Dimension getButtonDimension()
+	{
+		return new Dimension(this.width, this.height);
 	}
 	
 	

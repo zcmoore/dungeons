@@ -1,14 +1,17 @@
 package edu.asu.ser215.pathfinder.inventory;
 
-public abstract class Item
+public class Item<T extends ItemData>
 {
-	protected ItemData itemData;
+	protected final Class<T> typeParameterClass;
+	protected T itemData;
 	protected String notes;
 	protected int quantity;
 	protected boolean masterwork;
 	
-	protected Item(ItemData itemData, String notes, int quantity, boolean masterwork)
+	public Item(Class<T> typeParameterClass, T itemData, String notes, 
+			int quantity, boolean masterwork)
 	{
+		this.typeParameterClass = typeParameterClass;
 		this.itemData = itemData;
 		this.notes = notes;
 		this.quantity = quantity;
@@ -18,22 +21,21 @@ public abstract class Item
 	//-------------------------------------------------------------------------
 	//-----------------------Accessors & Mutators------------------------------
 	//-------------------------------------------------------------------------
-	public abstract <T extends ItemData> T getData();
+
+	public T getData() {
+		return itemData;
+	}
+
+	public void setItemData(T itemData) {
+		this.itemData = itemData;
+	}
 
 	public String getNotes() {
 		return notes;
 	}
-	
+
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-	
-	public boolean isMasterwork() {
-		return masterwork;
-	}
-	
-	public void setMasterwork(boolean masterwork) {
-		this.masterwork = masterwork;
 	}
 
 	public int getQuantity() {
@@ -44,20 +46,18 @@ public abstract class Item
 		this.quantity = quantity;
 	}
 
-	public void setItemData(ItemData itemData) {
-		this.itemData = itemData;
+	public boolean isMasterwork() {
+		return masterwork;
+	}
+
+	public void setMasterwork(boolean masterwork) {
+		this.masterwork = masterwork;
+	}
+
+	public Class<T> getTypeParameterClass() {
+		return typeParameterClass;
 	}
 	
-	//-------------------------------------------------------------------------
-	//-------------------------ItemData Mutators-------------------------------
-	//-------------------------------------------------------------------------
-	public abstract void setName(String name);
-
-	public abstract void setType(String type);
-
-	public abstract void setCost(int cost);
-
-	public abstract void setWeight(int weight);
-
-	public abstract void setDescription(String description);
+	
+	
 }

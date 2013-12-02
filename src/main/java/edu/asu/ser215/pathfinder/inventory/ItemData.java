@@ -3,13 +3,14 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 /**
- * Represents attributes of items that are not expected to change (e.g. cost
+ * Represents attributes of items that cannot be change (e.g. base_cost
  * and weight). ItemData objects are immutable. However, changes to these
- * values can be represented using the set methods available in the Item class.
+ * values can be represented using the available values in Item or its subclasses)
+ * or by creating a new ItemData object
  * 
- * Each subclass of ItemData has a related class that inherits Item. Item holds
- * the "mutators" for ItemData, and should be used to represent items instead of
- * ItemData. All Items have ItemData.
+ * Each subclass of ItemData has a related class that extends Item. Item holds 
+ * item information that can (and is expected to) change, and should be used to 
+ * represent item objects instead of ItemData. All Items have an ItemData object.
  * 
  * All ItemData objects are mapped upon instantiation. Additionally, any two
  * ItemData objects that hold the same values will reference the same
@@ -27,7 +28,7 @@ public abstract class ItemData
 {
 	protected final String name;
 	protected final String type;
-	protected final int cost; //in copper pieces
+	protected final int baseCost; //in copper pieces
 	protected final int weight; //in pounds
 	protected final String description;
 	
@@ -38,7 +39,7 @@ public abstract class ItemData
 	{
 		this.name = name;
 		this.type = type;
-		this.cost = cost;
+		this.baseCost = cost;
 		this.weight = weight;
 		this.description = description;
 	}
@@ -153,7 +154,7 @@ public abstract class ItemData
 	 */
 	@Override
 	public String toString() {
-		return "ItemData [name=" + name + ", type=" + type + ", cost=" + cost
+		return "ItemData [name=" + name + ", type=" + type + ", cost=" + baseCost
 				+ ", weight=" + weight + ", description=" + description + "]";
 	}
 	
@@ -168,8 +169,8 @@ public abstract class ItemData
 		return type;
 	}
 
-	public int getCost() {
-		return cost;
+	public int getBaseCost() {
+		return baseCost;
 	}
 
 	public int getWeight() {
@@ -179,89 +180,4 @@ public abstract class ItemData
 	public String getDescription() {
 		return description;
 	}
-	
-	//replaced by constructItemData
-	/*private static <T, V extends ItemData> V createChildInstance(Class<V> desiredType, T[] desiredParameters)
-	{
-		V returnObject = null;
-		Constructor<?>[] constructorArray; //holds all constructors of Class<V>
-		Constructor<V> desiredConstructor = null; //holds the constructor which matched the provided parameters
-		Class<?>[] constructorParameters; //holds the parameters of a single constructor
-		Object[] primitiveParameters; //holds casted values of the parameters of a single constructor //This is used to account for primitives passed through the generic array "parameters"
-		boolean numberOfParametersMatch;
-		boolean typeOfParametersMatch;
-		boolean primitiveParameterMatch;
-        boolean constructorParameterMatch;
-		
-		try
-		{
-			constructorArray = desiredType.getDeclaredConstructors();
-			
-			//Search for the desired constructor within the constructor array
-			for (Constructor<?> potentialConstructor : constructorArray)
-			{
-				//Collect information for comparison
-				constructorParameters = potentialConstructor.getParameterTypes();
-                primitiveParameters = primitiveClassCast(constructorParameters);
-                
-                //Test if numberOfParametersMatch
-                numberOfParametersMatch = (constructorParameters.length == desiredParameters.length);
-                
-                if (numberOfParametersMatch)
-                {
-                	//Test if the typeOfParameters in the desiredParameters array match the typeOfParameters taken by the potential constructor
-                    typeOfParametersMatch = true;
-                    for (int index = 0; index < constructorParameters.length; index++)
-                    {
-                        primitiveParameterMatch = (primitiveParameters[index].getClass().equals(desiredParameters[index].getClass()));
-                        constructorParameterMatch = (constructorParameters[index].equals(desiredParameters[index].getClass()));
-                        
-                        if (!(primitiveParameterMatch || constructorParameterMatch))
-                        {
-                            typeOfParametersMatch = false;
-                            break;
-                        }
-                    }
-                    
-                    //Determine if the desired constructor has been found
-                    if (typeOfParametersMatch)
-                    {
-                    	desiredConstructor = (Constructor<V>)potentialConstructor;
-                        break;
-                    }
-                }
-			}
-			
-			returnObject = desiredConstructor.newInstance(desiredParameters);
-		}catch (Exception e){System.out.println(e);}
-		
-		return returnObject;
-	}
-	
-	//replaced by primitiveArrayCast
-	private static <T> Object[] primitiveClassCast(T[] array)
-    {
-        int arrayLength = array.length;
-        Object[] returnArray = new Object[arrayLength];
-        
-        for (int index = 0; index < arrayLength; index++)
-        {
-            if ((array[index].equals(int.class)))
-                returnArray[index] = new Integer(0);
-            else if ((array[index].equals(double.class)))
-                returnArray[index] = new Double(0.0);
-            else if ((array[index].equals(float.class)))
-                returnArray[index] = new Float(0);
-            else if ((array[index].equals(byte.class)))
-                returnArray[index] = new Byte("0");
-            else if ((array[index].equals(short.class)))
-                returnArray[index] = new Short("0");
-            else if ((array[index].equals(long.class)))
-                returnArray[index] = new Long("0");
-            else
-                returnArray[index] = array[index];
-        }
-        
-        return returnArray;
-    }*/
 }

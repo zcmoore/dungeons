@@ -83,7 +83,7 @@ public class WeaponData extends ItemData
 				+ damagePotentialMedium + ", critMultiplier=" + critMultiplier
 				+ ", minimumCritRoll=" + minimumCritRoll + ", damageTypes="
 				+ Arrays.toString(damageTypes) + ", name=" + name + ", type="
-				+ type + ", cost=" + cost + ", weight=" + weight
+				+ type + ", cost=" + baseCost + ", weight=" + weight
 				+ ", description=" + description + "]";
 	}
 	
