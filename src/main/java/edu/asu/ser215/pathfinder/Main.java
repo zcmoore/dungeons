@@ -16,7 +16,7 @@ public class Main extends StateBasedGame {
 	// List of Game States that should be initialized
 	// NOTE: These states MUST be added in the constructor first
 	// TODO: Class loading
-	public static final int[] GAME_STATES = { MainMenu.ID, GameBoard.ID };
+	public static final int[] GAME_STATES = { MainMenu.ID, GameBoard.ID, MapScreen.ID };
 	// Default Game State to enter upon launching the application
 	public static final int DEFAULT_GAME_STATE = MainMenu.ID;
 
@@ -24,6 +24,7 @@ public class Main extends StateBasedGame {
 		super(GAME_TITLE);
 		this.addState(new MainMenu());
 		this.addState(new GameBoard());
+		this.addState(new MapScreen());
 		System.out.println("Constructor finished.");
 	}
 

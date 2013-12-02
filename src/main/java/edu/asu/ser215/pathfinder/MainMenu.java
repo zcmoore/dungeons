@@ -13,8 +13,8 @@ public class MainMenu extends BasicGameState {
 	public static final int ID = 0;
 
 	private Image demo;
-	private int demoX = 200, demoY = 200;
-	private int delta = 1;
+	private double demoX = 200, demoY = 200;
+	private double delta = 0.1;
 
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException 
@@ -23,8 +23,9 @@ public class MainMenu extends BasicGameState {
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
-			throws SlickException {
-		g.drawImage(demo, demoX, demoY);
+			throws SlickException
+	{
+		g.drawImage(demo, (int) demoX, (int) demoY);
 		g.fillOval(75, 100, 100, 100);
 		g.drawString("Play Now", 80, 80);
 	}
@@ -39,6 +40,8 @@ public class MainMenu extends BasicGameState {
 				game.enterState(GameBoard.ID);
 			}
 		}
+		
+		demoX += this.delta * delta;
 	}
 
 	@Override
