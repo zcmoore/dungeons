@@ -8,10 +8,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import edu.asu.ser215.pathfinder.map.MapData;
 
-public class MapScreen  extends BasicGameState
+public class MapScreen extends BasicGameState
 {
 	public static final int ID = 2;
-	protected MapData mapData;
+	protected MapData mapData = new MapData.EmptyMapData();
 
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException 
@@ -34,6 +34,6 @@ public class MapScreen  extends BasicGameState
 	@Override
 	public int getID()
 	{
-		return GameBoard.ID;
+		return ID;
 	}
 }

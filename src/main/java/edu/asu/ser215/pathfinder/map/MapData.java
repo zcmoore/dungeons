@@ -10,6 +10,44 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class MapData implements UserDisplay, Serializable
 {
+	public static class EmptyMapData extends MapData
+	{
+		private static final long serialVersionUID = 1L;
+		
+		public EmptyMapData()
+		{
+			
+		}
+		
+		@Override
+		public void close()
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void open()
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void update(GameContainer container, StateBasedGame game,
+				int delta)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+		
+		public void render(GameContainer container, StateBasedGame game, Graphics g)
+		{
+			
+		}
+		
+	}
+	
 	private static final long serialVersionUID = 1L;
 	
 	protected Point backgroundOffset = new Point(0, 0);
