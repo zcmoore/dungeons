@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.asu.ser215.pathfinder.character.ScoreType.NoMapException;
 import edu.asu.ser215.pathfinder.inventory.ItemData;
 
+//TODO test Generics
 public class ScoreList<T extends ScoreType>
 {
 	protected final Class<T> typeParameterClass;

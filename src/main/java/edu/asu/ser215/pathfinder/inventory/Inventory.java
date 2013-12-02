@@ -1,6 +1,7 @@
 package edu.asu.ser215.pathfinder.inventory;
 import java.util.ArrayList;
 
+//TODO test generic methods
 public class Inventory 
 {
 	public static final int DEFAULT_WEIGHT_CAPACITY = 50;
@@ -8,9 +9,9 @@ public class Inventory
 	protected String name; //name of inventory
 	protected String description;
 	protected String notes; //notes the GM has placed on this inventory
-	protected ArrayList<GenericItem> genericItems;
-	protected ArrayList<Armour> armours;
-	protected ArrayList<Weapon> weapons;
+	protected ArrayList<Item<GenericItemData>> genericItems;
+	protected ArrayList<Item<ArmourData>> armours;
+	protected ArrayList<Item<WeaponData>> weapons;
 	protected int copperPieces; //how much money is stored in this inventory currently
 	protected int weightCapacity;
 	protected int weightUsed; //minimum is 0, cannot be directly set
@@ -50,8 +51,8 @@ public class Inventory
 	 * @param weightCapacity
 	 */
 	public Inventory(String name, String description, String notes,
-			ArrayList<GenericItem> genericItems, ArrayList<Armour> armours,
-			ArrayList<Weapon> weapons, int copperPieces, int weightCapacity) 
+			ArrayList<Item<GenericItemData>> genericItems, ArrayList<Item<ArmourData>> armours,
+			ArrayList<Item<WeaponData>> weapons, int copperPieces, int weightCapacity) 
 	{
 		this.name = name;
 		this.description = description;
@@ -71,12 +72,12 @@ public class Inventory
 	 * 
 	 * @return	an array of all items currently contained in this inventory
 	 */
-	public Item[] getAllItems()
+	public Item<?>[] getAllItems()
 	{
 		int numberOfGenericItems = this.genericItems.size();
 		int numberOfArmours = this.armours.size();
 		int numberOfWeapons = this.weapons.size();
-		Item[] allItems = new Item[numberOfGenericItems + numberOfArmours + numberOfWeapons];
+		Item<?>[] allItems = new Item[numberOfGenericItems + numberOfArmours + numberOfWeapons];
 		int currentIndex = 0;
 		
 		System.arraycopy(getGenericItems(), 0, allItems, currentIndex, numberOfGenericItems);
@@ -94,18 +95,19 @@ public class Inventory
 	 * @param item
 	 * @return	boolean indicatig whether the add was successful.
 	 */
-	public boolean addItem(Item item)
+	@SuppressWarnings("unchecked")
+	public boolean addItem(Item<?> item)
 	{
 		boolean itemAdded = true;
 		
 		if (canHoldItem(item))
 		{
-			if (item instanceof GenericItem)
-				this.genericItems.add((GenericItem)item);
-			else if (item instanceof Armour)
-				this.armours.add((Armour)item);
-			else if (item instanceof Weapon)
-				this.weapons.add((Weapon)item);
+			if (item.getTypeParameterClass().equals(GenericItemData.class))
+				this.genericItems.add((Item<GenericItemData>)item);
+			else if (item.getTypeParameterClass().equals(ArmourData.class))
+				this.armours.add((Item<ArmourData>)item);
+			else if (item.getTypeParameterClass().equals(WeaponData.class))
+				this.weapons.add((Item<WeaponData>)item);
 			else
 				itemAdded = false;
 			
@@ -124,16 +126,17 @@ public class Inventory
 	 * 
 	 * @param item the item to be removed from this inventory
 	 */
-	public void removeItem(Item item)
+	@SuppressWarnings("unchecked")
+	public void removeItem(Item<?> item)
 	{
 		try
 		{
-			if (item instanceof GenericItem)
-				this.genericItems.remove((GenericItem)item);
-			else if (item instanceof Armour)
-				this.armours.remove((Armour)item);
-			else if (item instanceof Weapon)
-				this.weapons.remove((Weapon)item);
+			if (item.getTypeParameterClass().equals(GenericItemData.class))
+				this.genericItems.remove((Item<GenericItemData>)item);
+			else if (item.getTypeParameterClass().equals(ArmourData.class))
+				this.armours.remove((Item<ArmourData>)item);
+			else if (item.getTypeParameterClass().equals(WeaponData.class))
+				this.weapons.remove((Item<WeaponData>)item);
 			
 			recalculateDependentVariables();
 		} catch (Exception e)
@@ -148,7 +151,7 @@ public class Inventory
 	 * 
 	 * @return true if the inventory is capable of holding the given item
 	 */
-	public boolean canHoldItem(Item item)
+	public boolean canHoldItem(Item<?> item)
 	{
 		int potentialWeight = this.weightUsed + item.getData().getWeight();
 		boolean acceptableWeight = (potentialWeight <= this.weightCapacity);
@@ -231,7 +234,7 @@ public class Inventory
 	 * @param genericItems	this will replace the current list of genericItems.
 	 * @return	whether or not the inventory is within capacity after the change.
 	 */
-	public boolean setGenericItems(ArrayList<GenericItem> genericItems) 
+	public boolean setGenericItems(ArrayList<Item<GenericItemData>> genericItems) 
 	{
 		this.genericItems = genericItems;
 		return verifyGoodStanding();
@@ -243,7 +246,7 @@ public class Inventory
 	 * @param armours	this will replace the current list of armours.
 	 * @return	whether or not the inventory is within capacity after the change.
 	 */
-	public boolean setArmours(ArrayList<Armour> armours) 
+	public boolean setArmours(ArrayList<Item<ArmourData>> armours) 
 	{
 		this.armours = armours;
 		return verifyGoodStanding();
@@ -255,7 +258,7 @@ public class Inventory
 	 * @param weapons	this will replace the current list of weapons.
 	 * @return	whether or not the inventory is within capacity after the change.
 	 */
-	public boolean setWeapons(ArrayList<Weapon> weapons) 
+	public boolean setWeapons(ArrayList<Item<WeaponData>> weapons) 
 	{
 		this.weapons = weapons;
 		return verifyGoodStanding();
@@ -306,16 +309,19 @@ public class Inventory
 		this.copperPieces = copperPieces;
 	}
 
-	public GenericItem[] getGenericItems() {
-		return genericItems.toArray(new GenericItem[genericItems.size()]);
+	@SuppressWarnings("unchecked")
+	public Item<GenericItemData>[] getGenericItems() {
+		return (Item<GenericItemData>[]) genericItems.toArray(new Item[genericItems.size()]);
 	}
 	
-	public Armour[] getArmours() {
-		return armours.toArray(new Armour[armours.size()]);
+	@SuppressWarnings("unchecked")
+	public Item<ArmourData>[] getArmours() {
+		return (Item<ArmourData>[]) armours.toArray(new Item[armours.size()]);
 	}
 	
-	public Weapon[] getWeapons() {
-		return weapons.toArray(new Weapon[weapons.size()]);
+	@SuppressWarnings("unchecked")
+	public Item<WeaponData>[] getWeapons() {
+		return (Item<WeaponData>[]) weapons.toArray(new Item[weapons.size()]);
 	}
 	
 	public int getWeightCapacity() {
