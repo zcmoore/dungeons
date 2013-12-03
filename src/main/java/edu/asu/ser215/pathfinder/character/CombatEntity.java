@@ -1,6 +1,14 @@
 package edu.asu.ser215.pathfinder.character;
 
-public class CombatEntity extends AnimateEntity
+/**
+ * Contains information necessary for combat. Any entity (character or otherwise)
+ * that can participate in combat should be a descendent of this class. CHARACTERS
+ * (not monsters) should extend CombatCharacter instead of CombatEntity directly.
+ * 
+ * @author Zach Moore
+ * @see edu.asu.ser215.pathfinder.character.CombatCharacter
+ */
+public class CombatEntity extends TokenEntity
 {
 	public static final int DEFAULT_HIT_POINTS = 10;
 	

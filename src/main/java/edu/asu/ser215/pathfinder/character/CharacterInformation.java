@@ -1,21 +1,29 @@
 package edu.asu.ser215.pathfinder.character;
 
+/**
+ * Represents background and demographic information about a character.
+ * 
+ * @author Zach Moore
+ * @see edu.asu.ser215.pathfinder.character.Character
+ * @see edu.asu.ser215.pathfinder.character.DomesticCharacter
+ */
 public class CharacterInformation
 {
 	protected CharacterAlignment alignment;
 	protected Race race;
-	protected String deity;
+	protected String deity; //arbitrary name of the character's diety
 	protected String gender;
 	protected int age;
-	protected int height;
-	protected int weight;
+	protected int height; //in inches
+	protected int weight; //in pounds
 	protected String hairColour;
 	protected String eyeColour;
 	//TODO add protected Location homeLand;
 	
 	public CharacterInformation(CharacterAlignment alignment, Race race,
 			String deity, String gender, int age, int height, int weight,
-			String hairColour, String eyeColour) {
+			String hairColour, String eyeColour)
+	{
 		super();
 		this.alignment = alignment;
 		this.race = race;

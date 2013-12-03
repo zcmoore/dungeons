@@ -3,7 +3,7 @@ package edu.asu.ser215.pathfinder.map;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-public class TokenList extends ArrayList<Token> 
+public class TokenList extends ArrayList<GameBoardToken> 
 {
 	private static final long serialVersionUID = 1L;
 	private Dimension tokenSize;
@@ -14,7 +14,7 @@ public class TokenList extends ArrayList<Token>
 		this.tokenSize = tokenSize;
 	}
 	
-	public boolean add(Token token)
+	public boolean add(GameBoardToken token)
 	{
 		boolean canBeAdded = token.getButtonDimension().equals(this.tokenSize);
 		
