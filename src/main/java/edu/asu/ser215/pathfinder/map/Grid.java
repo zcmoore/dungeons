@@ -1,5 +1,6 @@
 package edu.asu.ser215.pathfinder.map;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
@@ -9,7 +10,7 @@ import org.newdawn.slick.SlickException;
 
 public class Grid
 {
-	public static final int DEFAULT_SQUARE_WIDTH = 20; //in pixels
+	public static final int DEFAULT_SQUARE_WIDTH = 40; //in pixels
 	public static final Point DEFAULT_TOP_LEFT_CORNER = new Point(0, 0);
 	
 	private Image gridImage;
@@ -28,7 +29,8 @@ public class Grid
 		int gridHeight = screenSize.height - Math.abs(topLeftOffset.y);
 		this.gridSize = new Dimension(gridWidth, gridHeight);
 		
-		drawGridImage();
+		this.gridImage = new Image("res/resourcepacks/default/img/whiteBackground.jpg");
+		drawGridImage(false);
 	}
 	
 	public Grid(int squareWidth, Dimension gridSize) throws SlickException
@@ -41,16 +43,25 @@ public class Grid
 		this(DEFAULT_SQUARE_WIDTH, DEFAULT_TOP_LEFT_CORNER, gridSize);
 	}
 	
-	private void drawGridImage() throws SlickException
+	private void drawGridImage(boolean resetImage) throws SlickException
 	{
-		this.gridImage = new Image(gridSize.width, gridSize.height);
+		if (resetImage || gridImage == null) gridImage = new Image(gridSize.width, gridSize.height);
+		
+		//Image.getGraphics deletes all image data
+		//TODO replace getGraphics call
+		drawGridDirect(gridImage.getGraphics());
+	}
+	
+	private void drawGridDirect(Graphics g)
+	{
 		Point lineStart = new Point(0, 0);
 		Point lineEnd = new Point(0, gridSize.height);
+		g.setColor(org.newdawn.slick.Color.red);
 		
 		//Draw vertical lines across the grid
 		while (lineStart.x <= gridSize.width)
 		{
-			gridImage.getGraphics().drawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y);
+			g.drawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y);
 			
 			//set the next line to be drawn equidistant from the previous point
 			lineStart.translate(this.squareWidth, 0);
@@ -62,7 +73,7 @@ public class Grid
 		lineEnd = new Point(gridSize.width, 0);
 		while (lineStart.y <= gridSize.height)
 		{
-			gridImage.getGraphics().drawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y);
+			g.drawLine(lineStart.x, lineStart.y, lineEnd.x, lineEnd.y);
 			
 			//set the next line to be drawn equidistant from the previous point
 			lineStart.translate(0, this.squareWidth);
@@ -82,7 +93,9 @@ public class Grid
 	
 	public void drawGrid(Graphics g)
 	{
-		g.drawImage(this.gridImage, this.topLeftOffset.x, this.topLeftOffset.y);
+		//g.drawImage(this.gridImage, this.topLeftOffset.x, this.topLeftOffset.y);
+		//TODO cache //replace with drawImage
+		drawGridDirect(g);
 	}
 	
 	public int getXOffset()
