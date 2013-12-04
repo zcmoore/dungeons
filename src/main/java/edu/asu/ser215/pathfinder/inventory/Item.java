@@ -1,5 +1,19 @@
 package edu.asu.ser215.pathfinder.inventory;
 
+/**
+ * Represents a single item of some type T. Item objects have attributes that
+ * are expected to be changed by the user (i.e. notes, quantity, and masterwork
+ * quality of the item) in addition to itemData (statistics of an item that 
+ * cannot be changed).
+ * 
+ * This class allows non-unique data to be associated with many different unique
+ * items, thus reducing memory usage.
+ * 
+ * @author Zach Moore
+ *
+ * @param <T> the type of ItemData that this item is associated with.
+ * @see edu.asu.ser215.pathfinder.inventory.ItemData
+ */
 public class Item<T extends ItemData>
 {
 	protected final Class<T> typeParameterClass;
@@ -57,7 +71,4 @@ public class Item<T extends ItemData>
 	public Class<T> getTypeParameterClass() {
 		return typeParameterClass;
 	}
-	
-	
-	
 }

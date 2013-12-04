@@ -3,11 +3,11 @@ package edu.asu.ser215.pathfinder.character;
 import java.util.HashMap;
 
 /**
- * Each SkillType is mapped upon instantiation, and will be unique. This class
- * contains a map of all SkillTypes that are available. Each SkillType is
+ * Each Skill is mapped upon instantiation, and will be unique. This class
+ * contains a map of all Skill types that are available. Each Skill is
  * associated with an index (which is unique to each instance), which will be
- * used to reference the value of each skill in SkillScoreList, and all other
- * classes which have a value for each SkillType
+ * used to reference the value of each skill in ScoreList<Skill>, and all other
+ * classes which have a value for each Skill type.
  * 
  * @author Zach Moore
  * @see edu.asu.ser215.pathfinderSkillScoreList
@@ -80,8 +80,11 @@ public class Skill extends ScoreType
 		return ScoreType.getScoreTypes(skillTypeMap, new Skill[skillTypeMap.size()]);
 	}
 	
+	/**
+	 * @return	an array of SpecifiedScores representing the default SkillScores
+	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends SpecifiedScore<?>> T[] getDefaultScores() throws NoMapException
+	public static <T extends SpecifiedScore<?>> T[] getDefaultScores()
 	{
 		Skill[] skillTypes = getScoreTypes();
 		SkillScore[] defaultScores = new SkillScore[skillTypes.length];
@@ -106,6 +109,9 @@ public class Skill extends ScoreType
 		return currentIndex;
 	}
 	
+	/* (non-Javadoc)
+	 * @see edu.asu.ser215.pathfinder.character.ScoreType#calculateModifier(edu.asu.ser215.pathfinder.character.SpecifiedScore)
+	 */
 	@Override
 	public int calculateModifier(SpecifiedScore<?> score) throws IllegalArgumentException
 	{
