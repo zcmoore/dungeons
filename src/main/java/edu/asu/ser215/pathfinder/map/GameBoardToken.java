@@ -6,10 +6,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class Token extends LinkedButton
+public class GameBoardToken extends LinkedButton
 {
 
-	public Token(GameContainer container, StateBasedGame game, Image icon,
+	public GameBoardToken(GameContainer container, StateBasedGame game, Image icon,
 			Point coordinates, UserDisplay link) 
 	{
 		super(container, game, icon, coordinates, link);

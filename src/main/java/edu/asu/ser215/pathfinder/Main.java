@@ -6,11 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-/**
- * Hello world!
- * 
- */
 public class Main extends StateBasedGame {
+	private static Main currentGame;
 	public static final int WINDOW_WIDTH = 1280;
 	public static final int WINDOW_HEIGHT = 720;
 	public static final String GAME_TITLE = "Dungeon";
@@ -24,11 +21,10 @@ public class Main extends StateBasedGame {
 	public Main() {
 		super(GAME_TITLE);
 		this.addState(new MainMenu());
-		System.out.println(this.getStateCount());
 		this.addState(new GameBoard());
-		System.out.println(this.getStateCount());
 		this.addState(new MapScreen());
-		System.out.println(this.getStateCount());
+		
+		Main.currentGame = this;
 		
 		System.out.println("Constructor finished.");
 	}
@@ -50,5 +46,10 @@ public class Main extends StateBasedGame {
 		}
 		// Move to the default game state
 		this.enterState(Main.DEFAULT_GAME_STATE);
+	}
+
+	public static Main getCurrentGame()
+	{
+		return currentGame;
 	}
 }
