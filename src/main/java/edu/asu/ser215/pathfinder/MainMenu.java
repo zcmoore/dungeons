@@ -9,7 +9,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MainMenu extends BasicGameState {
+import edu.asu.ser215.pathfinder.map.BattleMapData;
+
+public class MainMenu extends BasicGameState
+{
 	public static final int ID = 0;
 
 	private Image demo;
@@ -31,13 +34,17 @@ public class MainMenu extends BasicGameState {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta)
-			throws SlickException {
+			throws SlickException
+	{
 		Input input = container.getInput();
 		int xpos = Mouse.getX();
 		int ypos = Main.WINDOW_HEIGHT - Mouse.getY();
 		if ((xpos > 75 && xpos < 175) && (ypos > 100 && ypos < 200)) {
 			if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-				game.enterState(GameBoard.ID);
+				//game.enterState(GameBoard.ID);
+				Image mapBackground = new Image("res/resourcepacks/default/img/testBackground.jpg");
+				MapScreen.setMapData(new BattleMapData(mapBackground, "Test Map"));
+				game.enterState(MapScreen.ID);
 			}
 		}
 		

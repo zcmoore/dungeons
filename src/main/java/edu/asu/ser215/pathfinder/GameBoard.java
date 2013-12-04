@@ -49,7 +49,8 @@ public class GameBoard extends BasicGameState implements ComponentListener {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta)
-			throws SlickException {
+			throws SlickException
+	{
 
 	}
 

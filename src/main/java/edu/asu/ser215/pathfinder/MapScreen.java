@@ -11,7 +11,8 @@ import edu.asu.ser215.pathfinder.map.MapData;
 public class MapScreen extends BasicGameState
 {
 	public static final int ID = 2;
-	protected MapData mapData = new MapData.EmptyMapData();
+	public static final MapData DEFAULT_MAP_DATA = new MapData.EmptyMapData();
+	protected static MapData mapData = DEFAULT_MAP_DATA;
 
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException 
@@ -35,5 +36,15 @@ public class MapScreen extends BasicGameState
 	public int getID()
 	{
 		return ID;
+	}
+	
+	public static void setMapData(MapData mapData)
+	{
+		MapScreen.mapData = mapData;
+	}
+	
+	public static void reset()
+	{
+		mapData = DEFAULT_MAP_DATA;
 	}
 }

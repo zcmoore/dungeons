@@ -27,6 +27,9 @@ public class CombatEntity extends TokenEntity
 	protected ModifiedScore saveReflex;
 	protected ModifiedScore saveWill;
 	
+	/**
+	 * omni-constructor
+	 */
 	public CombatEntity(String name, int difficultyChallenge,
 			ModifiedScore hitPoints, ModifiedScore initiative, int speedLand,
 			int speedSwim, int speedClimb, int speedFly, int speedBurrow,
@@ -50,6 +53,9 @@ public class CombatEntity extends TokenEntity
 		this.saveWill = saveWill;
 	}
 
+	//-------------------------------------------------------------------------
+	//-----------------------Accessors & Mutators------------------------------
+	//-------------------------------------------------------------------------
 	public int getDifficultyChallenge() {
 		return difficultyChallenge;
 	}
