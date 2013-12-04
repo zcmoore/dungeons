@@ -2,22 +2,15 @@ package edu.asu.ser215.pathfinder.character;
 
 import java.util.HashMap;
 
-/**
- * A singleton class that represents all the available races in the game.
- * 
- * @author Moon, Seth
- * 
- */
 public class Race 
 {
-	private static HashMap<String, Race> raceMap;
+	private static HashMap<String, Race> raceMap = new HashMap<>();
 
-	private String name;
-	private ScoreList<Ability> abilities;
-	private Race.Size size;
-	private int ac_modifier; // Armor class modifier
-	private double space; // Amount of space on the board
-	private int natural_reach; // How far the race can naturally reach
+	private final String name;
+	private final ScoreList<Ability> abilityModifiers; //what bonuses does this race provide?
+	private final Race.Size size;
+	private final int ac_modifier; // Armor class modifier
+	private final int natural_reach; // How far the race can naturally reach
 
 	/**
 	 * Different sizes for each race as well as some sane defaults for armor
@@ -51,20 +44,18 @@ public class Race
 
 	/**
 	 * Creates a new race with the given attributes.
-	 * @param name The name of the race
-	 * @param abilities List of default abilities the race may have
-	 * @param size The size of the race
-	 * @param ac_modifier Armor class modifier
-	 * @param space Amount of space on the board.
+	 * @param name 			The name of the race
+	 * @param abilities 	List of default abilities the race may have
+	 * @param size 			The size of the race
+	 * @param ac_modifier 	Armor class modifier
 	 */
 	private Race(
 			String name, ScoreList<Ability> abilities, Race.Size size,
-			int ac_modifier, double space, int natural_reach) {
+			int ac_modifier, int natural_reach) {
 		this.name = name;
-		this.abilities = abilities;
+		this.abilityModifiers = abilities;
 		this.size = size;
 		this.ac_modifier = ac_modifier;
-		this.space = space;
 		this.natural_reach = natural_reach;
 	}
 	
@@ -83,7 +74,7 @@ public class Race
 		if(raceMap == null)
 			raceMap = new HashMap<String, Race>();
 		if(!raceMap.containsKey(name)) {
-			Race race = new Race(name, abilities, size, ac_modifier, space, natural_reach);
+			Race race = new Race(name, abilities, size, ac_modifier, natural_reach);
 			raceMap.put(name, race);
 		}
 	}
@@ -116,7 +107,7 @@ public class Race
 	}
 	
 	public ScoreList<Ability> getAbilities() {
-		return abilities;
+		return abilityModifiers;
 	}
 	
 	public Race.Size getSize() {
@@ -125,10 +116,6 @@ public class Race
 	
 	public int getACModifier() {
 		return ac_modifier;
-	}
-	
-	public double getSpace() {
-		return space;
 	}
 	
 	public int getNaturalReach() {

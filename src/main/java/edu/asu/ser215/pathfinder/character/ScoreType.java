@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
+ * Each implementation of ScoreType will represent on type of score, and contain
+ * a map of all values that represent a score of that type. For example, Ability
+ * may have values such as "Strength" "Dexterity" and "Constitution"
+ * 
  * All child classes of ScoreType should implement the following static methods:
  * 		public static int indexOf(String typeName)
  * 		public static <T extends ScoreType> T[] getScoreTypes()

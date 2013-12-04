@@ -2,6 +2,14 @@ package edu.asu.ser215.pathfinder.character;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a single PC. 
+ * 
+ * @see <a 
+ *      href="http://www.d20pfsrd.com/basics-ability-scores/character-creation">
+ *      Pathfinder's guide on character building & character sheets</a>
+ * @author Zach Moore
+ */
 public class PlayerCharacter extends CombatCharacter
 {
 	protected String playerName; //name of player controlling the character

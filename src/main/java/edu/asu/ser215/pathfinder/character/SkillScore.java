@@ -1,5 +1,10 @@
 package edu.asu.ser215.pathfinder.character;
 
+/**
+ * @author Zach Moore
+ * @see edu.asu.ser215.pathfinder.character.SpecifiedScore
+ *
+ */
 public class SkillScore extends SpecifiedScore<Skill> implements Modified
 {
 	public static final int TRAINED_BONUS = 3;
