@@ -79,7 +79,6 @@ public class MainMenu extends JPanel implements ActionListener {
 				listener.optionsButton();
 			}
 		}
-
 	}
 
 	public interface MainMenuListener {

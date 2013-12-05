@@ -16,6 +16,7 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	public Game() {
 		this.setContentPane(new MainMenu(this));
 		this.pack();
+		this.setLocationRelativeTo(null);
 	}
 
 	public static void main(String[] args) {

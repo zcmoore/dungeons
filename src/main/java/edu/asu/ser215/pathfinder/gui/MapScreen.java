@@ -4,9 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -17,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -28,6 +34,7 @@ public class MapScreen extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = -6459058384168850722L;
 	protected ArrayList<MapScreenListener> listeners;
+	private JTextField txtSearch;
 
 	public MapScreen() {
 		super();
@@ -73,6 +80,14 @@ public class MapScreen extends JPanel implements ActionListener {
 		btnCreateNew.setBackground(Color.LIGHT_GRAY);
 		npc_toolbar.add(btnCreateNew);
 
+		JLabel lblSearch = new JLabel("Search:");
+		npc_toolbar.add(lblSearch);
+
+		txtSearch = new JTextField();
+		txtSearch.setToolTipText("Search");
+		npc_toolbar.add(txtSearch);
+		txtSearch.setColumns(10);
+
 		JPanel npc_listing = new JPanel();
 		npcs_tab.setViewportView(npc_listing);
 		npc_listing.setLayout(new BoxLayout(npc_listing, BoxLayout.Y_AXIS));
@@ -80,33 +95,49 @@ public class MapScreen extends JPanel implements ActionListener {
 		JPanel single_npc_listing = new JPanel();
 		npc_listing.add(single_npc_listing);
 		single_npc_listing.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("60px"),
+				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("57px:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("69px:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("71px:grow"), }, new RowSpec[] {
-				RowSpec.decode("14px"), FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"), FormFactory.RELATED_GAP_ROWSPEC,
+				ColumnSpec.decode("71px:grow"),
+				FormFactory.RELATED_GAP_COLSPEC, }, new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("15dlu"),
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC, }));
 
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File(
+					"res/resourcepacks/default/img/orc.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			single_npc_listing.add(picLabel, "2, 2, 1, 3");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		JLabel lblJoeSchmoe = new JLabel("Joe Schmoe");
-		single_npc_listing.add(lblJoeSchmoe, "1, 1, center, center");
+		single_npc_listing.add(lblJoeSchmoe, "4, 2, 3, 1, left, center");
 
 		JButton btnAdd = new JButton("Add");
-		single_npc_listing.add(btnAdd, "1, 3");
+		single_npc_listing.add(btnAdd, "4, 4");
 
 		JButton btnInspect = new JButton("Inspect");
-		single_npc_listing.add(btnInspect, "3, 3");
+		single_npc_listing.add(btnInspect, "6, 4");
 
-		JButton btnRemove = new JButton("Remove");
+		JButton btnRemove = new JButton("Loot");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		single_npc_listing.add(btnRemove, "5, 3");
+		single_npc_listing.add(btnRemove, "8, 4");
 
 		JSeparator separator = new JSeparator();
-		single_npc_listing.add(separator, "1, 5, 5, 1, fill, center");
+		single_npc_listing.add(separator, "1, 6, 9, 1, fill, center");
 
 		JPanel notes_tab = new JPanel();
 		tabbedPane.addTab("Notes", null, notes_tab, null);
