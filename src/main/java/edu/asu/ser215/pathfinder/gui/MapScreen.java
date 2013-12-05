@@ -111,9 +111,13 @@ public class MapScreen extends JPanel implements ActionListener {
 
 		BufferedImage myPicture;
 		try {
+			// Load the BufferedImage
 			myPicture = ImageIO.read(new File(
 					"res/resourcepacks/default/img/orc.png"));
+			// Create a new JLabel with a new ImageIcon as the constructor argument
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setToolTipText("Avatar Tooltip");
+			// Add the label to the panel
 			single_npc_listing.add(picLabel, "2, 2, 1, 3");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
