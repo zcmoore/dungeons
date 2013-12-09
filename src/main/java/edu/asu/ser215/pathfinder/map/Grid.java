@@ -2,11 +2,9 @@ package edu.asu.ser215.pathfinder.map;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class Grid
 {
@@ -20,7 +18,7 @@ public class Grid
 						//grid relative to the topleft corner of the screen
 	private Dimension gridSize; //size of the grid
 	
-	public Grid(int squareWidth, Point topLeftOffset, Dimension screenSize) throws SlickException
+	public Grid(int squareWidth, Point topLeftOffset, Dimension screenSize)
 	{
 		this.squareWidth = squareWidth;
 		this.topLeftOffset = topLeftOffset;
@@ -29,23 +27,23 @@ public class Grid
 		int gridHeight = screenSize.height - Math.abs(topLeftOffset.y);
 		this.gridSize = new Dimension(gridWidth, gridHeight);
 		
-		this.gridImage = new Image("res/resourcepacks/default/img/whiteBackground.jpg");
+		//this.gridImage = new Image("res/resourcepacks/default/img/whiteBackground.jpg");
 		drawGridImage(false);
 	}
 	
-	public Grid(int squareWidth, Dimension gridSize) throws SlickException
+	public Grid(int squareWidth, Dimension gridSize)
 	{
 		this(squareWidth, DEFAULT_TOP_LEFT_CORNER, gridSize);
 	}
 	
-	public Grid(Dimension gridSize) throws SlickException
+	public Grid(Dimension gridSize)
 	{
 		this(DEFAULT_SQUARE_WIDTH, DEFAULT_TOP_LEFT_CORNER, gridSize);
 	}
 	
-	private void drawGridImage(boolean resetImage) throws SlickException
+	private void drawGridImage(boolean resetImage)
 	{
-		if (resetImage || gridImage == null) gridImage = new Image(gridSize.width, gridSize.height);
+		//if (resetImage || gridImage == null) gridImage = new Image(gridSize.width, gridSize.height);
 		
 		//Image.getGraphics deletes all image data
 		//TODO replace getGraphics call
@@ -56,7 +54,7 @@ public class Grid
 	{
 		Point lineStart = new Point(0, 0);
 		Point lineEnd = new Point(0, gridSize.height);
-		g.setColor(org.newdawn.slick.Color.red);
+		g.setColor(Color.red);
 		
 		//Draw vertical lines across the grid
 		while (lineStart.x <= gridSize.width)
@@ -81,12 +79,12 @@ public class Grid
 		}
 	}
 	
-	private void drawTokenOverlay() throws SlickException
+	private void drawTokenOverlay()
 	{
 		//TODO method body
 	}
 	
-	public void snapTokensToGrid() throws SlickException
+	public void snapTokensToGrid()
 	{
 		//TODO method body
 	}

@@ -1,54 +1,11 @@
 package edu.asu.ser215.pathfinder.map;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.io.Serializable;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-
 public abstract class MapData implements UserDisplay, Serializable
 {
-	public static class EmptyMapData extends MapData
-	{
-		private static final long serialVersionUID = 1L;
-		
-		public EmptyMapData()
-		{
-			super("EmptyMap");
-		}
-		
-		@Override
-		public void close()
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void open()
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void update(GameContainer container, StateBasedGame game,
-				int delta)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-		
-		public void render(GameContainer container, StateBasedGame game, Graphics g)
-		{
-			
-		}
-		
-	}
-	
 	private static final long serialVersionUID = 1L;
 	private static Image DEFAULT_BCKGROUND = null;
 	
@@ -81,27 +38,8 @@ public abstract class MapData implements UserDisplay, Serializable
 	
 	private static Image constructDefaultBackground()
 	{
-		try
-		{
-			return(new Image("res/resourcepacks/default/img/whiteBackground.jpg"));
-		} catch (SlickException e)
-		{
-			System.out.println("caught");
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public abstract void update(GameContainer container, StateBasedGame game, int delta);
-	
-	public void render(GameContainer container, StateBasedGame game, Graphics g)
-	{
-		g.drawImage(mapBackground, backgroundOffset.x, backgroundOffset.y);
-		for (LinkedButton link : links)
-		{
-			Point linkLocation = link.getCoordinates();
-			g.drawImage(link.getIcon(), linkLocation.x, linkLocation.y);
-		}
+		//TODO
+		return null;
 	}
 
 	public Point getBackgroundOffset() {
