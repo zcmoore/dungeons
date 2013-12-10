@@ -133,7 +133,6 @@ public class Tile extends JButton
 	public void setHighlighted(boolean highlighted)
 	{
 		this.highlighted = highlighted;
-		Game.getCurrentGame().repaint();
 	}
 
 	public GameBoardToken getToken() {
@@ -215,17 +214,20 @@ public class Tile extends JButton
 		{
 			// TODO Auto-generated method stub
 			System.out.println("Tile with Token Clicked");
-			if (Tile.selectedTile == null)
-			{
-				tileReference.setHighlighted(true);
-				tileReference.alterHighlightOfSurroundingTiles(true);
-				Tile.selectedTile = tileReference;
-			}
 			
 			if (tileReference.isHighlighted())
 				tileReference.setHighlighted(false);
 			else
 				tileReference.setHighlighted(true);
+			
+			if (Tile.selectedTile == null)
+			{
+				tileReference.alterHighlightOfSurroundingTiles(true);
+				Tile.selectedTile = tileReference;
+				Game.getCurrentGame().repaint();
+			}
+			
+			
 		}
 	}
 }

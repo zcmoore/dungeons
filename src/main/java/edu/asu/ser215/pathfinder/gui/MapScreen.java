@@ -25,7 +25,7 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 		NPCListListener, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = -6459058384168850722L;
-	public static final Dimension PREFERRED_RESOLUTION = Game.PREFERRED_RESOLUTION;
+	public static final Dimension PREFERRED_RESOLUTION = Game.getPreferredResolution();
 
 	public MapScreen()
 	{

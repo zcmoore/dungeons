@@ -2,4 +2,7 @@
 	<ability>Strength</ability>
 	<ability>Dexterity</ability>
 	<ability>Constitution</ability>
+	<ability>Intelligence</ability>
+	<ability>Wisdom</ability>
+	<ability>Charisma</ability>
 </abilities>
