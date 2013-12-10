@@ -1,13 +1,13 @@
 package edu.asu.ser215.pathfinder.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -16,16 +16,21 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import edu.asu.ser215.pathfinder.Game;
 import edu.asu.ser215.pathfinder.gui.GamePanel.GamePanelListener;
 import edu.asu.ser215.pathfinder.gui.NPCList.NPCListListener;
+import edu.asu.ser215.pathfinder.gui.map.MapPanel;
 
 public class MapScreen extends GamePanel<GamePanelListener> implements
 		NPCListListener, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = -6459058384168850722L;
+	public static final Dimension PREFERRED_RESOLUTION = Game.PREFERRED_RESOLUTION;
 
-	public MapScreen() {
+	public MapScreen()
+	{
 		super();
+		this.setPreferredSize(PREFERRED_RESOLUTION);
 		this.setLayout(new BorderLayout(0, 0));
 
 		// Menu Bar
@@ -40,7 +45,7 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 
 		// Split Pane
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0.5);
+		splitPane.setResizeWeight(0); //make left pane as small as possible
 		this.add(splitPane);
 
 		// Left Side
@@ -57,8 +62,10 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 		tabbedPane.addTab("Items", null, items_tab, null);
 
 		// Right Side
-		JLabel lblMapGoesHere = new JLabel("Map Goes Here");
-		splitPane.setRightComponent(lblMapGoesHere);
+		//TODO populate right pane
+		//JLabel lblMapGoesHere = new JLabel("Map Goes Here");
+		MapPanel mapPanel = new MapPanel(null, 10, 10, new Dimension(50, 50));
+		splitPane.setRightComponent(mapPanel);
 	}
 
 	public MapScreen(MapScreenListener listener) {
