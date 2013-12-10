@@ -9,6 +9,8 @@
 
 	<name>Dungeons Game</name>
 	<url>http://asu.edu</url>
+	<inceptionYear>Student group project as ASU</inceptionYear>
+	<description>Tabletop game management system compatible with Pathfinder.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,11 +71,6 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
-						<configuration>
-							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
