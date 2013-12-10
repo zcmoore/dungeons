@@ -1,5 +1,7 @@
 package edu.asu.ser215.pathfinder;
 
+import java.awt.Dimension;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -13,9 +15,25 @@ public class Game extends GameFrame implements MainMenuListener,
 		MapScreenListener {
 
 	private static final long serialVersionUID = 1888995364766567859L;
+	public static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
+	private static Game currentGame;
 
-	public Game() {
+	private Game()
+	{
 		this.changePanel(new MainMenu(this));
+	}
+	
+	public static Game constructGame()
+	{
+		if (currentGame == null)
+			currentGame = new Game();
+		
+		return currentGame;
+	}
+	
+	public static Game getCurrentGame()
+	{
+		return constructGame();
 	}
 
 	public static void main(String[] args) {
@@ -28,7 +46,7 @@ public class Game extends GameFrame implements MainMenuListener,
 			ex.printStackTrace();
 			System.exit(1);
 		}
-		Game g = new Game();
+		Game g = constructGame();
 		g.setVisible(true);
 	}
 
