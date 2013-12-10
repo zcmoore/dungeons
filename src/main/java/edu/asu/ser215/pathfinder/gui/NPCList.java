@@ -25,7 +25,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import edu.asu.ser215.pathfinder.gui.GamePanel.GamePanelListener;
+import edu.asu.ser215.pathfinder.core.GamePanel;
+import edu.asu.ser215.pathfinder.core.GamePanel.GamePanelListener;
 import edu.asu.ser215.pathfinder.gui.NPCList.NPCListListener;
 
 public class NPCList extends GamePanel<NPCListListener> {
@@ -41,6 +42,7 @@ public class NPCList extends GamePanel<NPCListListener> {
 
 		this.scrollPane = new JScrollPane();
 		this.add(this.scrollPane, BorderLayout.CENTER);
+		this.scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
 		// NPC toolbar
 		JToolBar npc_toolbar = new JToolBar();
@@ -144,7 +146,6 @@ public class NPCList extends GamePanel<NPCListListener> {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e);
 		// TODO Create actionPerformed content
 		if (e.getActionCommand().equals("Inspect")) {
 			for (NPCListListener l : this.listeners) {
