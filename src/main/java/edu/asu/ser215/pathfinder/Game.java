@@ -44,4 +44,10 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 		System.out.println("Options button");
 	}
 
+	@Override
+	public void characterInspect(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

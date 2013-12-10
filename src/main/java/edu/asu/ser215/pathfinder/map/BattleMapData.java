@@ -1,15 +1,7 @@
 package edu.asu.ser215.pathfinder.map;
 
 import java.awt.Dimension;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-
-import edu.asu.ser215.pathfinder.Main;
-import edu.asu.ser215.pathfinder.MapScreen;
+import java.awt.Image;
 
 public class BattleMapData extends MapData
 {
@@ -19,17 +11,10 @@ public class BattleMapData extends MapData
 	public BattleMapData(Image mapBackground, String name)
 	{
 		this(mapBackground, name, null);
-		try
-		{
-			int mapWidth = mapBackground.getWidth();
-			int mapHeight = mapBackground.getHeight();
-			Dimension gridSize = new Dimension(mapWidth, mapHeight);
-			this.gridOverlay = new Grid(gridSize);
-		} catch (SlickException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		int mapWidth = mapBackground.getWidth(null); //TODO
+		int mapHeight = mapBackground.getHeight(null); //TODO
+		Dimension gridSize = new Dimension(mapWidth, mapHeight);
+		this.gridOverlay = new Grid(gridSize);
 	}
 	
 	public BattleMapData(Image mapBackground, String name, Grid gridOverlay)
@@ -44,49 +29,15 @@ public class BattleMapData extends MapData
 		this.gridOverlay = gridOverlay;
 	}
 
-	/** 
-	 * Sets the MapScreen to its default data
-	 * 
-	 * @see edu.asu.ser215.pathfinder.map.UserDisplay#close()
-	 */
 	@Override
-	public void close()
-	{
-		MapScreen.reset();
-	}
-
-	/**
-	 * Transitions the current game state to MapScreen using the data specified
-	 * by this BattleMapData object
-	 * 
-	 * @see edu.asu.ser215.pathfinder.map.UserDisplay#open()
-	 */
-	@Override
-	public void open()
-	{
-		MapScreen.setMapData(this);
-		Main.getCurrentGame().enterState(MapScreen.ID);
+	public void close() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta)
-	{
-		//TODO method body
-		//check mouse collisions
-		
-	}
-	
-	public void render(GameContainer container, StateBasedGame game, Graphics g)
-	{
-		//TODO method body
-		//draw background, and menu buttons
-		super.render(container, game, g);
-		
-		//draw grid
-		gridOverlay.drawGrid(g);
-		
-		//draw tokens on grid
-		
+	public void open() {
+		// TODO Auto-generated method stub
 		
 	}
 
