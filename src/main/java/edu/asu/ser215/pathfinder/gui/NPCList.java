@@ -42,6 +42,7 @@ public class NPCList extends GamePanel<NPCListListener> {
 
 		this.scrollPane = new JScrollPane();
 		this.add(this.scrollPane, BorderLayout.CENTER);
+		this.scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
 		// NPC toolbar
 		JToolBar npc_toolbar = new JToolBar();
@@ -145,7 +146,6 @@ public class NPCList extends GamePanel<NPCListListener> {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e);
 		// TODO Create actionPerformed content
 		if (e.getActionCommand().equals("Inspect")) {
 			for (NPCListListener l : this.listeners) {
