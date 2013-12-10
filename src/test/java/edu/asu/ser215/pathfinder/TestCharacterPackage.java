@@ -1,4 +1,4 @@
-package Tests;
+package edu.asu.ser215.pathfinder;
 
 import java.io.File;
 import java.util.Arrays;
