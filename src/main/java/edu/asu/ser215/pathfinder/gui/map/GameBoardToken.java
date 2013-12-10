@@ -73,6 +73,6 @@ public class GameBoardToken
 		//TODO add support for multiple token types
 		//TODO return 0 for immobile and non-ranged tokens
 		//TODO convert from feet to grid squares
-		return 2;
+		return 3;
 	}
 }

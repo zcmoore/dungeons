@@ -44,6 +44,7 @@ public class MapPanel extends JPanel
 		
 		//TODO remove test
 		gridTiles[5][5].setToken(new GameBoardToken(GameBoardToken.DefaultIcons.playerToken));
+		gridTiles[10][5].setToken(new GameBoardToken(GameBoardToken.DefaultIcons.playerToken));
 		
 		this.add(innerPanel);
 	}

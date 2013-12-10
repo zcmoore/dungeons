@@ -18,6 +18,8 @@ import edu.asu.ser215.pathfinder.core.DiceSet;
 
 public class Items 
 {
+	public static final String XML_PATH = "res/resourcepacks/default/items.xml";
+	
 	/**
 	 * Contains the names of each tag and node name found in the items XML file.
 	 * These variables will be used to load and save XMLs.
@@ -131,6 +133,14 @@ public class Items
 				XMLTagNames.ARMOUR_NODE, XMLTagNames.GENERIC_ITEM_NODE);
 	}
 	
+	/**
+	 * @see		edu.asu.ser215.pathfinder.inventory.Items#loadAllItems(File)
+	 */
+	public static ItemData[] loadAllItems()
+	{
+		return loadAllItems(new File(XML_PATH));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T extends ItemData> T[] parseItemData(NodeList nodeList, String... expectedNodeNames)
 	{
@@ -237,6 +247,8 @@ public class Items
 			
 			returnData = GenericItemData.constructGenericItemData(name, type, cost, 
 					weight, description);
+			
+			System.out.println("GenericItemData Loaded: " + returnData.toString());
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -305,6 +317,8 @@ public class Items
 					weight, description, range, damagePotentialSmall, 
 					damagePotentialMedium, critMultiplier, 
 					minimumCritRoll, damageTypes);
+			
+			System.out.println("WeaponData Loaded: " + returnData.toString());
 		} catch (NumberFormatException e)
 		{
 			returnData = null;
@@ -377,6 +391,8 @@ public class Items
 					weight, description, armourBonus, armourCheckPenalty, 
 					maxDexBonus, arcaneFailureChance, speedLimitation20, 
 					speedLimitation30);
+			
+			System.out.println("ArmourData Loaded: " + returnData.toString());
 		} catch (NumberFormatException e)
 		{
 			returnData = null;
