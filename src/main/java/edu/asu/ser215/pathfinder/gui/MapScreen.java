@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -31,7 +30,7 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 
 	public MapScreen() {
 		super();
-		this.setPreferredSize(PREFERRED_RESOLUTION);
+		this.setPreferredSize(MapScreen.PREFERRED_RESOLUTION);
 		this.setLayout(new BorderLayout(0, 0));
 
 		// Menu Bar
@@ -46,7 +45,7 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 
 		// Split Pane
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setResizeWeight(0); //make left pane as small as possible
+		splitPane.setResizeWeight(0); // make left pane as small as possible
 		this.add(splitPane);
 
 		// Left Side
@@ -63,8 +62,8 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 		tabbedPane.addTab("Items", null, items_tab, null);
 
 		// Right Side
-		//TODO populate right pane
-		//JLabel lblMapGoesHere = new JLabel("Map Goes Here");
+		// TODO populate right pane
+		// JLabel lblMapGoesHere = new JLabel("Map Goes Here");
 		MapPanel mapPanel = new MapPanel(null, 10, 10, new Dimension(50, 50));
 		splitPane.setRightComponent(mapPanel);
 	}
