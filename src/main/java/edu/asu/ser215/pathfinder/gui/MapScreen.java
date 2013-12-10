@@ -25,7 +25,7 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 		NPCListListener, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = -6459058384168850722L;
-	public static final Dimension PREFERRED_RESOLUTION = Game.PREFERRED_RESOLUTION;
+	public static final Dimension PREFERRED_RESOLUTION = Game.getPreferredResolution();
 
 	public MapScreen()
 	{
@@ -63,8 +63,10 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 
 		// Right Side
 		//TODO populate right pane
-		//JLabel lblMapGoesHere = new JLabel("Map Goes Here");
-		MapPanel mapPanel = new MapPanel(null, 10, 10, new Dimension(50, 50));
+		//TODO replace with constants
+		int numberOfTiles = Game.getPreferredResolution().height / 50 - 1;
+		MapPanel mapPanel = new MapPanel(null, numberOfTiles, numberOfTiles, 
+				new Dimension(50, 50));
 		splitPane.setRightComponent(mapPanel);
 	}
 

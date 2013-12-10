@@ -23,7 +23,7 @@ public class TestCharacterPackage
 	
 	public static void testLoadingScoreTypes(String outputPrefix)
 	{
-		String abilityXML = "C:\\Users\\monsoon300\\Desktop\\abilities.xml";
+		String abilityXML = "res/resourcepacks/default/abilities.xml";
 		
 		System.out.println(outputPrefix + "Begin test: LoadScoreTypes");
 		
@@ -36,7 +36,7 @@ public class TestCharacterPackage
 	public static void testSkillType(String outputPrefix) throws NoMapException
 	{
 		System.out.println(outputPrefix + "Begin test: SkillType");
-		Skill.constructSkillType(skillNames[0]);
+		Skill.constructSkillType(skillNames[0], Ability.getScoreTypes()[0].getName());
 		if (Skill.getScoreTypes().length > 0)
 			System.out.println(outputPrefix + "Tentative success");
 		System.out.println(outputPrefix + Arrays.toString(Skill.getDefaultScores()));

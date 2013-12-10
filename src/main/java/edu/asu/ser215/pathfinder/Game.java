@@ -6,22 +6,43 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import edu.asu.ser215.pathfinder.character.Ability;
+import edu.asu.ser215.pathfinder.character.Skill;
 import edu.asu.ser215.pathfinder.gui.MainMenu;
 import edu.asu.ser215.pathfinder.gui.MainMenu.MainMenuListener;
 import edu.asu.ser215.pathfinder.gui.MapScreen;
 import edu.asu.ser215.pathfinder.gui.MapScreen.MapScreenListener;
+import edu.asu.ser215.pathfinder.inventory.ItemData;
+import edu.asu.ser215.pathfinder.inventory.Items;
 
 public class Game extends JFrame implements MainMenuListener, MapScreenListener {
 
 	private static final long serialVersionUID = 1888995364766567859L;
-	public static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
+	private static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
 	private static Game currentGame;
+	
+	private final Ability[] abilityTypes;
+	private final Skill[] skillTypes;
+	private final ItemData[] allItemData;
 
 	private Game()
 	{
+		// Set and display game container
 		this.setContentPane(new MainMenu(this));
 		this.pack();
 		this.setLocationRelativeTo(null);
+		
+		// Load and store Abilities and Skills
+		Ability.loadAbilities();
+		Skill.loadSkills();
+		this.abilityTypes = Ability.getScoreTypes();
+		this.skillTypes = Skill.getScoreTypes();
+		
+		// Load and store ItemData
+		this.allItemData = Items.loadAllItems();
+		
+		// Console update
+		System.out.println("Game constructor complete.");
 	}
 	
 	public static Game constructGame()
@@ -45,14 +66,28 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 		} catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
 		  System.out.println("Unable to load native look and feel");
 		}
+		
 		Game g = constructGame();
 		g.setVisible(true);
+	}	
+
+	/**
+	 * @return a copy of the current Preferred Resolution
+	 */
+	public static Dimension getPreferredResolution()
+	{
+		return new Dimension(PREFERRED_RESOLUTION);
+	}
+
+	public Ability[] getAbilityTypes() {
+		return abilityTypes;
 	}
 
 	@Override
 	public void startButton()
 	{
 		System.out.println("Start Button pressed");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setContentPane(new MapScreen(this));
 		this.pack();
 		this.repaint();
@@ -69,6 +104,14 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	{
 		// TODO Auto-generated method stub
 		System.out.println("Inspect button");
+	}
+
+	public Skill[] getSkillTypes() {
+		return skillTypes;
+	}
+
+	public ItemData[] getAllItemData() {
+		return allItemData;
 	}
 
 }

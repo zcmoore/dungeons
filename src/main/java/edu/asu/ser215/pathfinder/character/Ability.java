@@ -32,6 +32,7 @@ import org.xml.sax.SAXException;
  */
 public class Ability extends ScoreType
 {
+	public static final String XML_PATH = "res/resourcepacks/default/abilities.xml";
 	public static final String ABILITY_TAG = "ability"; //how each ability is listed in abilities.xml
 	public static final int DEFAULT_SCORE = 10;
 	public static final int DEFAULT_BONUS = 0;
@@ -226,6 +227,11 @@ public class Ability extends ScoreType
 		return newModifier;
 	}
 	
+	public static boolean loadAbilities()
+	{
+		return loadAbilities(new File(XML_PATH));
+	}
+	
 	/**
 	 * Attempts to load all abilities listed in the given file, and add them to
 	 * the abilityMap. Will return true if the values were loaded successfully.
@@ -249,7 +255,7 @@ public class Ability extends ScoreType
 			//get ability nodes from document
 			abilityNodes = abilitiesDocument.getElementsByTagName(ABILITY_TAG);
 			
-			//parse nodes into ItemData objects, and add them to the list
+			//parse nodes into Ability objects, and add them to the map
 			for(int index = 0; index < abilityNodes.getLength(); index++)
 			{
 				Node currentNode = abilityNodes.item(index);

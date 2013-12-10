@@ -1,0 +1,37 @@
+<skills>
+	<skill name="Acrobatics" ability="Dexterity" />
+	<skill name="Appriase" ability="Intelligence" />
+	<skill name="Climb" ability="Charisma" />
+	<skill name="Craft1" ability="Intelligence" />
+	<skill name="Craft2" ability="Intelligence" />
+	<skill name="Craft3" ability="Intelligence" />
+	<skill name="Diplomacy" ability="Charisma" />
+	<skill name="DisableDevice" ability="Dexterity" />
+	<skill name="Disguise" ability="Charisma" />
+	<skill name="Escape" ability="Dexterity" />
+	<skill name="Fly" ability="Dexterity" />
+	<skill name="Heal" ability="Wisdom" />
+	<skill name="Intimidate" ability="Charisma" />
+	<skill name="Arcana" ability="Intelligence" />
+	<skill name="Dungeoneering" ability="Intelligence" />
+	<skill name="Engineering" ability="Intelligence" />
+	<skill name="Geography" ability="Intelligence" />
+	<skill name="History" ability="Intelligence" />
+	<skill name="LocalHistory" ability="Intelligence" />
+	<skill name="Nature" ability="Intelligence" />
+	<skill name="Nobility" ability="Intelligence" />
+	<skill name="Religion" ability="Intelligence" />
+	<skill name="Linguistics" ability="Intelligence" />
+	<skill name="Perception" ability="Wisdom" />
+	<skill name="Perform1" ability="Charisma" />
+	<skill name="Perform2" ability="Charisma" />
+	<skill name="Profession1" ability="Wisdom" />
+	<skill name="Profession2" ability="Wisdom" />
+	<skill name="Ride" ability="Dexterity" />
+	<skill name="SenseMotive" ability="Wisdom" />
+	<skill name="SlightOfHand" ability="Dexterity" />
+	<skill name="Spellcraft" ability="Intelligence" />
+	<skill name="Stealth" ability="Dexterity" />
+	<skill name="Survival" ability="Wisdom" />
+	<skill name="Swim" ability="Strength" />
+</skills>
