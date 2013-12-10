@@ -23,7 +23,7 @@ public class TestCharacterPackage
 	
 	public static void testLoadingScoreTypes(String outputPrefix)
 	{
-		String abilityXML = "/pathfinder/res/resourcepacks/default/abilities.xml";
+		String abilityXML = "res/resourcepacks/default/abilities.xml";
 		
 		System.out.println(outputPrefix + "Begin test: LoadScoreTypes");
 		

@@ -87,6 +87,7 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	public void startButton()
 	{
 		System.out.println("Start Button pressed");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setContentPane(new MapScreen(this));
 		this.pack();
 		this.repaint();
