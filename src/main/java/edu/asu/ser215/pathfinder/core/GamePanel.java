@@ -1,11 +1,11 @@
-package edu.asu.ser215.pathfinder.gui;
+package edu.asu.ser215.pathfinder.core;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import edu.asu.ser215.pathfinder.gui.GamePanel.GamePanelListener;
+import edu.asu.ser215.pathfinder.core.GamePanel.GamePanelListener;
 
 /**
  * Base panel in which all displayed game panels should inherit from. GamePanel
@@ -39,5 +39,11 @@ public abstract class GamePanel<L extends GamePanelListener> extends JPanel
 		return this.listeners.remove(listener);
 	}
 
-	interface GamePanelListener {}
+	/**
+	 * Any events that fire notify the GamePanelListeners
+	 * 
+	 * @author Moon, Seth
+	 * 
+	 */
+	public interface GamePanelListener {}
 }

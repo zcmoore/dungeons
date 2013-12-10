@@ -16,7 +16,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
-import edu.asu.ser215.pathfinder.gui.GamePanel.GamePanelListener;
+import edu.asu.ser215.pathfinder.core.GamePanel;
+import edu.asu.ser215.pathfinder.core.GamePanel.GamePanelListener;
 import edu.asu.ser215.pathfinder.gui.NPCList.NPCListListener;
 
 public class MapScreen extends GamePanel<GamePanelListener> implements

@@ -25,7 +25,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import edu.asu.ser215.pathfinder.gui.GamePanel.GamePanelListener;
+import edu.asu.ser215.pathfinder.core.GamePanel;
+import edu.asu.ser215.pathfinder.core.GamePanel.GamePanelListener;
 import edu.asu.ser215.pathfinder.gui.NPCList.NPCListListener;
 
 public class NPCList extends GamePanel<NPCListListener> {
