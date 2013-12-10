@@ -2,10 +2,10 @@ package edu.asu.ser215.pathfinder;
 
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import edu.asu.ser215.pathfinder.core.GameFrame;
 import edu.asu.ser215.pathfinder.character.Ability;
 import edu.asu.ser215.pathfinder.character.Skill;
 import edu.asu.ser215.pathfinder.gui.MainMenu;
@@ -15,7 +15,8 @@ import edu.asu.ser215.pathfinder.gui.MapScreen.MapScreenListener;
 import edu.asu.ser215.pathfinder.inventory.ItemData;
 import edu.asu.ser215.pathfinder.inventory.Items;
 
-public class Game extends JFrame implements MainMenuListener, MapScreenListener {
+public class Game extends GameFrame implements MainMenuListener,
+		MapScreenListener {
 
 	private static final long serialVersionUID = 1888995364766567859L;
 	private static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
@@ -28,9 +29,7 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	private Game()
 	{
 		// Set and display game container
-		this.setContentPane(new MainMenu(this));
-		this.pack();
-		this.setLocationRelativeTo(null);
+		this.changePanel(new MainMenu(this));
 		
 		// Load and store Abilities and Skills
 		Ability.loadAbilities();
@@ -61,12 +60,13 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	public static void main(String[] args) {
 		// Adds the native look and feel to the UI
 		try {
-		    UIManager.setLookAndFeel(
-		        UIManager.getSystemLookAndFeelClassName());
-		} catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-		  System.out.println("Unable to load native look and feel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (UnsupportedLookAndFeelException | ClassNotFoundException
+				| InstantiationException | IllegalAccessException ex) {
+			System.out.println("Unable to load native look and feel");
+			ex.printStackTrace();
+			System.exit(1);
 		}
-		
 		Game g = constructGame();
 		g.setVisible(true);
 	}	
@@ -84,26 +84,19 @@ public class Game extends JFrame implements MainMenuListener, MapScreenListener 
 	}
 
 	@Override
-	public void startButton()
-	{
-		System.out.println("Start Button pressed");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setContentPane(new MapScreen(this));
-		this.pack();
-		this.repaint();
+	public void startButton() {
+		this.changePanel(new MapScreen(this));
 	}
 
 	@Override
-	public void optionsButton()
-	{
+	public void optionsButton() {
 		System.out.println("Options button");
 	}
 
 	@Override
-	public void characterInspect(String name)
-	{
+	public void characterInspect(String name) {
 		// TODO Auto-generated method stub
-		System.out.println("Inspect button");
+
 	}
 
 	public Skill[] getSkillTypes() {
