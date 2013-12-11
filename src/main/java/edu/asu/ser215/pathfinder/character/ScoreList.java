@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import edu.asu.ser215.pathfinder.character.ScoreType.NoMapException;
 import edu.asu.ser215.pathfinder.inventory.ItemData;
 
-//TODO test Generics
 /**
  * ScoreList represents a list of scores that corresponds directly to a specific
  * score type. Each scoreList will contain exactly the number of elements as there

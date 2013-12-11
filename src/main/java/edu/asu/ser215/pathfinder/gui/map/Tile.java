@@ -26,6 +26,7 @@ public class Tile extends JButton
 	private static Tile selectedTile;
 	private static Image highlightOverlay = defaultHighlightOverlay(); //overlay this image onto a tile if it is currently highlighted
 	private static Image baseImage = null; //base image for all tiles //default is none
+	public static final boolean DEFAULT_GRID_PAINTED = true; //whether or not to show the border on default
 	
 	protected final GridPanel associatedPanel;
 	protected final Point gridLocation; //coordinates on the associated grid of this tile
@@ -63,7 +64,7 @@ public class Tile extends JButton
         Color modifiedGridColor = new Color(gridColor.getRed(), gridColor.getGreen(), gridColor.getBlue(), (int) (gridOpacity*255));
         Border gridLines = BorderFactory.createLineBorder(modifiedGridColor);
         this.setBorder(gridLines);
-        this.setBorderPainted(true);
+        this.setBorderPainted(DEFAULT_GRID_PAINTED);
         
         // Set icon based on the current token and baseImage values
         updateIcon();

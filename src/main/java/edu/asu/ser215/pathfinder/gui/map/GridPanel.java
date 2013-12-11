@@ -15,6 +15,7 @@ public class GridPanel extends JPanel
 	protected Image backgroundImage;
 	protected Tile[][] gridTiles;
 	protected Dimension buttonSize;
+	protected boolean gridIsVisible;
 	protected int gridWidth; //in pixels
 	protected int gridHeight; //in pixels
 	
@@ -43,8 +44,8 @@ public class GridPanel extends JPanel
 		// Format panel
 		this.setLayout(new GridLayout(rows, columns, -1, -1));
 		
-		//TODO replace color and opacity with variable
-		populateGrid(Color.red, MapPanel.DEFAULT_GRID_OPACITY);
+		// Populate
+		populateGrid(MapPanel.DEFAULT_GRID_COLOR, MapPanel.DEFAULT_GRID_OPACITY);
 	}
 
 	/**
@@ -70,8 +71,8 @@ public class GridPanel extends JPanel
 		// Format panel
 		this.setLayout(new GridLayout(rows, columns, -1, -1));
 		
-		//TODO replace color and opacity with variable
-		populateGrid(Color.red, MapPanel.DEFAULT_GRID_OPACITY);
+		// Populate
+		populateGrid(MapPanel.DEFAULT_GRID_COLOR, MapPanel.DEFAULT_GRID_OPACITY);
 	}
 	
 	/**
@@ -92,8 +93,8 @@ public class GridPanel extends JPanel
 		this.backgroundImage = resizeImage(backgroundImage);
 		this.setLayout(new GridLayout(rows, columns, -1, -1));
 		
-		//TODO replace color and opacity with variable
-		populateGrid(Color.red, MapPanel.DEFAULT_GRID_OPACITY);
+		// Populate
+		populateGrid(MapPanel.DEFAULT_GRID_COLOR, MapPanel.DEFAULT_GRID_OPACITY);
 	}
 	
 	private Image resizeImage(Dimension newSize, Image baseImage)
@@ -120,6 +121,8 @@ public class GridPanel extends JPanel
 	
 	private void populateGrid(Color gridColor, float gridOpacity)
 	{
+		gridIsVisible = Tile.DEFAULT_GRID_PAINTED;
+		
 		// 
 		for (int row = 0; row < gridTiles.length; row++)
 		{
@@ -169,15 +172,22 @@ public class GridPanel extends JPanel
 		setGridVisability(false);
 	}
 	
-	public void setGridVisability(boolean isVisible)
+	public void setGridVisability(boolean isGridVisible)
 	{
 		for (Tile[] tiles : gridTiles)
 		{
 			for (Tile tile : tiles)
 			{
-				tile.setBorderPainted(isVisible);
+				tile.setBorderPainted(isGridVisible);
 			}
 		}
+		
+		gridIsVisible = isGridVisible;
+	}
+	
+	public void toggleGridVisability()
+	{
+		this.setGridVisability(!gridIsVisible);
 	}
 
 	public int getGridWidth() {
@@ -200,7 +210,10 @@ public class GridPanel extends JPanel
 		return buttonSize;
 	}
 	
-	
+	public boolean isGridVisible()
+	{
+		return this.gridIsVisible;
+	}
 	
 	
 }

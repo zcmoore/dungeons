@@ -12,15 +12,18 @@ import edu.asu.ser215.pathfinder.gui.MainMenu;
 import edu.asu.ser215.pathfinder.gui.MainMenu.MainMenuListener;
 import edu.asu.ser215.pathfinder.gui.MapScreen;
 import edu.asu.ser215.pathfinder.gui.MapScreen.MapScreenListener;
+import edu.asu.ser215.pathfinder.gui.map.MapPanel;
 import edu.asu.ser215.pathfinder.inventory.ItemData;
 import edu.asu.ser215.pathfinder.inventory.Items;
 
 public class Game extends GameFrame implements MainMenuListener,
 		MapScreenListener {
+	
+	public static MapPanel currentMap;
 
 	private static final long serialVersionUID = 1888995364766567859L;
 	private static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
-	private static final String DEFAULT_MAP_BACKGROUND = "res/resourcepacks/default/img/testBackground.jpg";
+	private static final String DEFAULT_MAP_BACKGROUND = "res/resourcepacks/default/img/defaultMap.png";
 	private static Game currentGame;
 	
 	private final Ability[] abilityTypes;
