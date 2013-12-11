@@ -2,11 +2,15 @@ package edu.asu.ser215.pathfinder.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -63,14 +67,27 @@ public class MapScreen extends GamePanel<GamePanelListener> implements
 		tabbedPane.addTab("Items", null, items_tab, null);
 
 		// Right Side
-		// TODO populate right pane
 		// JLabel lblMapGoesHere = new JLabel("Map Goes Here");
-		// TODO populate right pane
 		// TODO replace with constants
-		int numberOfTiles = (Game.getPreferredResolution().height / 50) - 1;
-		MapPanel mapPanel = new MapPanel(null, numberOfTiles, numberOfTiles,
-				new Dimension(50, 50));
+		Dimension buttonDimension = new Dimension(50, 50);
+		Dimension mapPanelDimension = new Dimension(950, 650);
+		Image backgroundImage = loadDefaultMapBackground();
+		
+		MapPanel mapPanel = new MapPanel(backgroundImage, mapPanelDimension, buttonDimension);
 		splitPane.setRightComponent(mapPanel);
+	}
+	
+	public static Image loadDefaultMapBackground()
+	{
+		Image backgroundImage = null;
+		try {
+			backgroundImage = ImageIO.read(new File(Game.getDefaultMapBackground()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return backgroundImage;
 	}
 
 	public MapScreen(MapScreenListener listener) {

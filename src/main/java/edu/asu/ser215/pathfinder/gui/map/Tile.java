@@ -1,5 +1,6 @@
 package edu.asu.ser215.pathfinder.gui.map;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -10,8 +11,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
 import edu.asu.ser215.pathfinder.Game;
 
@@ -24,24 +27,24 @@ public class Tile extends JButton
 	private static Image highlightOverlay = defaultHighlightOverlay(); //overlay this image onto a tile if it is currently highlighted
 	private static Image baseImage = null; //base image for all tiles //default is none
 	
-	protected final MapPanel associatedPanel;
+	protected final GridPanel associatedPanel;
 	protected final Point gridLocation; //coordinates on the associated grid of this tile
 	protected boolean highlighted; //should this tile be highlighted
 	protected GameBoardToken token; //token that currently occupies this square //null for an empty tile
 	
-	public Tile(MapPanel associatedPanel, Point gridLocation)
+	public Tile(GridPanel associatedPanel, Point gridLocation, Color gridColor, float gridOpacity)
 	{
-		this(associatedPanel, gridLocation, null);
+		this(associatedPanel, gridLocation, null, gridColor, gridOpacity);
 	}
 	
-	public Tile(MapPanel associatedPanel, Point gridLocation, GameBoardToken token)
+	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken token, Color gridColor, float gridOpacity)
 	{
-		this(associatedPanel, gridLocation, token, false, null);
-  		
+		this(associatedPanel, gridLocation, token, false, gridColor, gridOpacity, null);
 	}
 	
-	public Tile(MapPanel associatedPanel, Point gridLocation, GameBoardToken token, 
-			boolean highlighted, ActionListener buttonListener)
+	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken token, 
+			boolean highlighted, Color gridColor, float gridOpacity, 
+			ActionListener buttonListener)
 	{
 		// Initialize variables
 		this.token = token;
@@ -49,14 +52,18 @@ public class Tile extends JButton
 		this.associatedPanel = associatedPanel;
 		this.gridLocation = gridLocation;
 		
-		this.associatedPanel.gridTiles[gridLocation.x][gridLocation.y] = this;
-		
-		// Make button invisible
-		this.setBorder(null);
-        this.setBorderPainted(false);
+		this.associatedPanel.getGridTiles()[gridLocation.x][gridLocation.y] = this;
+
+        // Make button invisible
         this.setContentAreaFilled(false);
         this.setOpaque(false);
         this.setFocusPainted(false);
+		
+        // Set border
+        Color modifiedGridColor = new Color(gridColor.getRed(), gridColor.getGreen(), gridColor.getBlue(), (int) (gridOpacity*255));
+        Border gridLines = BorderFactory.createLineBorder(modifiedGridColor);
+        this.setBorder(gridLines);
+        this.setBorderPainted(true);
         
         // Set icon based on the current token and baseImage values
         updateIcon();
@@ -197,10 +204,7 @@ public class Tile extends JButton
 	
 	public void toggleHighlight()
 	{
-		if (this.isHighlighted())
-			this.setHighlighted(false);
-		else
-			this.setHighlighted(true);
+		this.setHighlighted(!isHighlighted());
 	}
 	
 	public boolean hasToken()

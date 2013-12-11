@@ -20,6 +20,7 @@ public class Game extends GameFrame implements MainMenuListener,
 
 	private static final long serialVersionUID = 1888995364766567859L;
 	private static final Dimension PREFERRED_RESOLUTION = new Dimension(1280, 720);
+	private static final String DEFAULT_MAP_BACKGROUND = "res/resourcepacks/default/img/testBackground.jpg";
 	private static Game currentGame;
 	
 	private final Ability[] abilityTypes;
@@ -105,6 +106,10 @@ public class Game extends GameFrame implements MainMenuListener,
 
 	public ItemData[] getAllItemData() {
 		return allItemData;
+	}
+
+	public static String getDefaultMapBackground() {
+		return DEFAULT_MAP_BACKGROUND;
 	}
 
 }
