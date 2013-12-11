@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import edu.asu.ser215.pathfinder.character.PlayerCharacter;
+import edu.asu.ser215.pathfinder.inventory.Inventory;
+
 public class MapPanel extends JPanel
 {
 	private static final long serialVersionUID = -5815553248180040761L;
@@ -43,8 +46,13 @@ public class MapPanel extends JPanel
 		this.gridPanel = new GridPanel(mapPanelDimension, buttonSize, backgroundImage);
 		
 		//TODO remove test
-		getGridTiles()[5][5].setToken(new GameBoardToken(GameBoardToken.DefaultIcons.playerToken));
-		getGridTiles()[5][6].setToken(new GameBoardToken(GameBoardToken.DefaultIcons.playerToken));
+		try {
+			getGridTiles()[5][5].setToken(PlayerCharacter.generateRandomPlayerCharacter().createToken());
+			getGridTiles()[5][9].setToken(PlayerCharacter.generateRandomPlayerCharacter().createToken());
+			getGridTiles()[5][14].setToken((new Inventory()).createToken());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		// Populate mapPanel
 		mapPanel.add(gridPanel);

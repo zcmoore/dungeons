@@ -1,5 +1,7 @@
 package edu.asu.ser215.pathfinder.character;
 
+import java.util.Random;
+
 /**
  * Represents a score that gains additional modifier(s) dependent on another
  * score object. An example of a ModifiedScore is a character skill, which gains
@@ -21,12 +23,28 @@ public class ModifiedScore extends Score implements Modified
 {
 	protected Score modifyingScore;
 	
+	/**
+	 * @param initialScore
+	 * @param initialBonus
+	 * @param modifyingAbility
+	 */
 	public ModifiedScore(int initialScore, int initialBonus, 
 			Score modifyingAbility) 
 	{
 		super(initialScore, initialBonus, false);
 		this.modifyingScore = modifyingAbility;
 		calculateDependentValues();
+	}
+	
+	/**
+	 * Returns an arbitrary ModifiedScore object. Should only be used in cases
+	 * where arbitrary data is necessary.
+	 */
+	public static ModifiedScore getArbitraryModifiedScore()
+	{
+		Random random = new Random();
+		return new ModifiedScore(random.nextInt(10) + 1, random.nextInt(5), 
+				Ability.getDefaultScores()[0]);
 	}
 
 	/* (non-Javadoc)

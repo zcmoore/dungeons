@@ -1,5 +1,9 @@
 package edu.asu.ser215.pathfinder.character;
 
+import edu.asu.ser215.pathfinder.TokenEntity;
+import edu.asu.ser215.pathfinder.gui.map.GameBoardToken;
+import edu.asu.ser215.pathfinder.inventory.Inventory;
+
 /**
  * Contains information necessary for combat. Any entity (character or otherwise)
  * that can participate in combat should be a descendent of this class. CHARACTERS
@@ -12,6 +16,7 @@ public class CombatEntity extends TokenEntity
 {
 	public static final int DEFAULT_HIT_POINTS = 10;
 	
+	protected Inventory inventory; //drops and/or current inventory
 	protected int difficultyChallenge; //a single int to represent to overall power of the entity
 	protected ModifiedScore hitPoints; //bonus will be negative to represent damage
 	protected ModifiedScore initiative;
@@ -36,7 +41,7 @@ public class CombatEntity extends TokenEntity
 			int armourClass, int armourClassTouch, int armourClassFlatFooted,
 			ModifiedScore saveFortitude, ModifiedScore saveReflex,
 			ModifiedScore saveWill) {
-		super(name);
+		super(name, true);
 		this.difficultyChallenge = difficultyChallenge;
 		this.hitPoints = hitPoints;
 		this.initiative = initiative;
@@ -166,6 +171,16 @@ public class CombatEntity extends TokenEntity
 
 	public void setSaveWill(ModifiedScore saveWill) {
 		this.saveWill = saveWill;
+	}
+
+	@Override
+	public GameBoardToken<? extends CombatEntity> createToken() {
+		return new GameBoardToken<CombatEntity>(this, GameBoardToken.DefaultIcons.monsterToken);
+	}
+
+	@Override
+	public Inventory getInventory() {
+		return inventory;
 	}
 	
 	

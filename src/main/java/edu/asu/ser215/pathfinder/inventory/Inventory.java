@@ -1,12 +1,14 @@
 package edu.asu.ser215.pathfinder.inventory;
 import java.util.ArrayList;
 
+import edu.asu.ser215.pathfinder.TokenEntity;
+import edu.asu.ser215.pathfinder.gui.map.GameBoardToken;
+
 //TODO test generic methods
-public class Inventory 
+public class Inventory extends TokenEntity
 {
 	public static final int DEFAULT_WEIGHT_CAPACITY = 50;
 	
-	protected String name; //name of inventory
 	protected String description;
 	protected String notes; //notes the GM has placed on this inventory
 	protected ArrayList<Item<GenericItemData>> genericItems;
@@ -23,7 +25,7 @@ public class Inventory
 	 */
 	public Inventory() 
 	{
-		this.name = "Item Container";
+		super("Item Container", false);
 		this.description = null;
 		this.notes = null;
 		this.genericItems = new ArrayList<>();
@@ -54,7 +56,7 @@ public class Inventory
 			ArrayList<Item<GenericItemData>> genericItems, ArrayList<Item<ArmourData>> armours,
 			ArrayList<Item<WeaponData>> weapons, int copperPieces, int weightCapacity) 
 	{
-		this.name = name;
+		super(name, false);
 		this.description = description;
 		this.notes = notes;
 		this.genericItems = genericItems;
@@ -330,6 +332,16 @@ public class Inventory
 	
 	public int getWeightUsed() {
 		return weightUsed;
+	}
+
+	@Override
+	public GameBoardToken<? extends Inventory> createToken() {
+		return new GameBoardToken<Inventory>(this, GameBoardToken.DefaultIcons.inventoryToken);
+	}
+
+	@Override
+	public Inventory getInventory() {
+		return this;
 	}
 	
 }

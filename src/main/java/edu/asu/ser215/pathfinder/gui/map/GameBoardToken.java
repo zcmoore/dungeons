@@ -6,6 +6,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import edu.asu.ser215.pathfinder.TokenEntity;
+
 /**
  * Represents a piece on the gameBoard (called a token). Each token is linked 
  * to an entity that it represents (e.g. a Player, and NPC, a Monster, an 
@@ -17,15 +19,17 @@ import javax.swing.ImageIcon;
  * @see edu.asu.ser215.pathfinder.gui.map.Tile
  *
  */
-public class GameBoardToken
+public class GameBoardToken<T extends TokenEntity>
 {
 	public static class DefaultIcons
 	{
-		public static final String playerTokenPath = "res/resourcepacks/default/img/defaultToken.png";
-		public static final String monsterTokenPath = "res/resourcepacks/default/img/defaultToken.png";
-		public static final String npcTokenPath = "res/resourcepacks/default/img/defaultToken.png";
-		public static final String inventoryTokenPath = "res/resourcepacks/default/img/defaultToken.png";
+		public static final String defaultTokenPath = "res/resourcepacks/default/img/defaultToken.png";
+		public static final String playerTokenPath = "res/resourcepacks/default/img/defaultPlayerToken.png";
+		public static final String monsterTokenPath = "res/resourcepacks/default/img/defaultMonsterToken.png";
+		public static final String npcTokenPath = "res/resourcepacks/default/img/defaultNPCToken.png";
+		public static final String inventoryTokenPath = "res/resourcepacks/default/img/defaultInventoryToken.png";
 		
+		public static final ImageIcon defaultToken = loadImageIcon(defaultTokenPath);
 		public static final ImageIcon playerToken = loadImageIcon(playerTokenPath);
 		public static final ImageIcon monsterToken = loadImageIcon(monsterTokenPath);
 		public static final ImageIcon npcToken = loadImageIcon(npcTokenPath);
@@ -51,9 +55,13 @@ public class GameBoardToken
 	}
 	
 	protected ImageIcon icon;
+	protected T tokenEntity;
 	
-	public GameBoardToken(ImageIcon icon)
+	public GameBoardToken(T tokenEntity, ImageIcon icon) throws NullPointerException
 	{
+		if (tokenEntity == null)
+			throw new NullPointerException("null tokenEntity passed to constructor");
+		this.tokenEntity = tokenEntity;
 		this.icon = icon;
 	}
 
@@ -75,4 +83,10 @@ public class GameBoardToken
 		//TODO convert from feet to grid squares
 		return 3;
 	}
+
+	public T getTokenEntity() {
+		return tokenEntity;
+	}
+	
+	
 }

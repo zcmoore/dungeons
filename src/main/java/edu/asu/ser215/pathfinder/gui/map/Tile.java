@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import edu.asu.ser215.pathfinder.Game;
@@ -31,19 +33,19 @@ public class Tile extends JButton
 	protected final GridPanel associatedPanel;
 	protected final Point gridLocation; //coordinates on the associated grid of this tile
 	protected boolean highlighted; //should this tile be highlighted
-	protected GameBoardToken token; //token that currently occupies this square //null for an empty tile
+	protected GameBoardToken<?> token; //token that currently occupies this square //null for an empty tile
 	
 	public Tile(GridPanel associatedPanel, Point gridLocation, Color gridColor, float gridOpacity)
 	{
 		this(associatedPanel, gridLocation, null, gridColor, gridOpacity);
 	}
 	
-	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken token, Color gridColor, float gridOpacity)
+	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken<?> token, Color gridColor, float gridOpacity)
 	{
 		this(associatedPanel, gridLocation, token, false, gridColor, gridOpacity, null);
 	}
 	
-	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken token, 
+	public Tile(GridPanel associatedPanel, Point gridLocation, GameBoardToken<?> token, 
 			boolean highlighted, Color gridColor, float gridOpacity, 
 			ActionListener buttonListener)
 	{
@@ -71,7 +73,7 @@ public class Tile extends JButton
   		
         // If listener is null, add the default listener
         if (buttonListener == null)
-        	this.addActionListener(new TileListener(this));
+        	this.addMouseListener(new TileListener(this));
         else
         	this.addActionListener(buttonListener);
 	}
@@ -145,11 +147,11 @@ public class Tile extends JButton
 		this.highlighted = highlighted;
 	}
 
-	public GameBoardToken getToken() {
+	public GameBoardToken<?> getToken() {
 		return token;
 	}
 
-	public void setToken(GameBoardToken token)
+	public void setToken(GameBoardToken<?> token)
 	{
 		this.token = token;
 		
@@ -225,7 +227,7 @@ public class Tile extends JButton
 	{
 		if ((source != null) && (target != null))
 		{
-			if (source.token != null)
+			if ((source.token != null) && (source.token.getTokenEntity().isMoveable()))
 			{
 				if (target.token == null)
 				{
@@ -253,8 +255,14 @@ public class Tile extends JButton
 		Game.getCurrentGame().repaint();
 	}
 
-	public static class TileListener implements ActionListener
+	public static class TileListener implements MouseListener 
 	{
+		private static final int NO_MOUSE_BUTTON = 0;
+		private static final int LEFT_MOUSE_BUTTON = 1;
+		private static final int MIDDLE_MOUSE_BUTTON = 2;
+		private static final int RIGHT_MOUSE_BUTTON = 3;
+		private static int currentMouseButton;
+		
 		Tile tileReference; //the tile that this is listening to
 		
 		public TileListener(Tile tileReference)
@@ -262,91 +270,134 @@ public class Tile extends JButton
 			this.tileReference = tileReference;
 		}
 		
-		@Override
-		public void actionPerformed(ActionEvent e)
+		public void recalculateCurrentMouseButton(MouseEvent mouseEvent)
 		{
-			// Update console
-			System.out.println("Tile Clicked");
+			if(SwingUtilities.isLeftMouseButton(mouseEvent))
+				currentMouseButton = LEFT_MOUSE_BUTTON;
+			else if(SwingUtilities.isRightMouseButton(mouseEvent))
+				currentMouseButton = RIGHT_MOUSE_BUTTON;
+			else if(SwingUtilities.isMiddleMouseButton(mouseEvent))
+				currentMouseButton = MIDDLE_MOUSE_BUTTON;
+			else
+				currentMouseButton = NO_MOUSE_BUTTON;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent mouseEvent) {
+			recalculateCurrentMouseButton(mouseEvent);
 			
 			// Act differently depending on the current state of the tile
 			if (tileReference.hasToken())
 				actOnToken();
 			else
 				actOnEmptyTile();
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent mouseEvent) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent mouseEvent) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent mouseEvent) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent mouseEvent) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 		private void actOnEmptyTile()
 		{
-			if (tileReference.isHighlighted() && (Tile.selectedTile != null))
+			if (currentMouseButton == LEFT_MOUSE_BUTTON)
 			{
-				// Clear highlighting from all tiles within the movement radius of the selected tile's token
-				Tile.selectedTile.alterHighlightOfSurroundingTiles(false);
-				
-				// Move selected token to this tile
-				try
+				// A token is selected, and this tile is in range
+				if (tileReference.isHighlighted() && (Tile.selectedTile != null))
 				{
-					Tile.transferToken(Tile.selectedTile, tileReference);
+					// Clear highlighting from all tiles within the movement radius of the selected tile's token
+					Tile.selectedTile.alterHighlightOfSurroundingTiles(false);
+					
+					// Move selected token to this tile
+					try
+					{
+						Tile.transferToken(Tile.selectedTile, tileReference);
+					}
+					catch (TileIsFullException e)
+					{
+						System.out.println("Did not move token: " + e.getMessage());
+					}
+					
+					// Deselect the tile
+					Tile.selectedTile = null;
+					
+					// Display changes
+					Game.getCurrentGame().repaint();
+					
+					//TODO make inventory tokens immobile
 				}
-				catch (TileIsFullException e)
+				
+				// There is a selected tile, but this tile is out of range
+				else if ((Tile.selectedTile != null))
 				{
-					System.out.println("Did not move token: " + e.getMessage());
+					Tile.clearSlelectedTile();
 				}
-				
-				// Deselect the tile
-				Tile.selectedTile = null;
-				
-				// Display changes
-				Game.getCurrentGame().repaint();
-				
-				//TODO make inventory tokens immobile
 			}
-			
-			// There is a selected tile, but this tile is out of range
-			else if ((Tile.selectedTile != null))
-			{
-				Tile.clearSlelectedTile();
-			}
+			//TODO right-click?
 		}
 		
 		private void actOnToken()
 		{
-			// No tile is currently selected
-			if (Tile.selectedTile == null)
+			if (currentMouseButton == LEFT_MOUSE_BUTTON)
 			{
-				tileReference.toggleHighlight();
+				// No tile is currently selected
+				if (Tile.selectedTile == null)
+				{
+					tileReference.toggleHighlight();
+					
+					// Highlight all tiles within the movement radius of this tile's token
+					tileReference.alterHighlightOfSurroundingTiles(true);
+					
+					// Select this tile
+					Tile.selectedTile = tileReference;
+					
+					// Display changes
+					Game.getCurrentGame().repaint();
+				}
 				
-				// Highlight all tiles within the movement radius of this tile's token
-				tileReference.alterHighlightOfSurroundingTiles(true);
+				// This tile is currently selected
+				else if(Tile.selectedTile == this.tileReference)
+				{
+					Tile.clearSlelectedTile();
+				}
 				
-				// Select this tile
-				Tile.selectedTile = tileReference;
+				// A different tile is currently selected, and within range
+				else if (tileReference.isHighlighted())
+				{
+					//TODO add support for player trade, looting, and combat
+					Tile.clearSlelectedTile();
+				}
 				
-				// Display changes
-				Game.getCurrentGame().repaint();
+				// A different tile is currently selected, and out of range
+				else
+				{
+					// Update console
+					System.out.println("Target is out of range");
+					
+					Tile.clearSlelectedTile();
+				}
 			}
-			
-			// This tile is currently selected
-			else if(Tile.selectedTile == this.tileReference)
-			{
-				Tile.clearSlelectedTile();
-			}
-			
-			// A different tile is currently selected, and within range
-			else if (tileReference.isHighlighted())
-			{
-				//TODO add support for player trade, looting, and combat
-				Tile.clearSlelectedTile();
-			}
-			
-			// A different tile is currently selected, and out of range
-			else
-			{
-				// Update console
-				System.out.println("Target is out of range");
-				
-				Tile.clearSlelectedTile();
-			}
-			
+			//TODO right-click?
 		}
 	}
 	
